@@ -1,0 +1,16 @@
+{
+  "name": "alimen",
+  "version": "0.0.1",
+  "homepage": "https://github.com/toddbellamy/alimen",
+  "authors": [
+    "toddbellamy <toddbellamy74@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
