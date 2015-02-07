@@ -1,0 +1,14 @@
+doctype
+html
+    head
+        title Alimen
+        base(href="/")
+        link(href="favicon.gif", rel="shortcut icon", type="image/gif")
+        link(rel="stylesheet", href="/vendor/bootstrap/dist/css/bootstrap.css")
+        link(rel="stylesheet", href="/vendor/toastr/toastr.css")
+        link(rel="stylesheet", href="/css/site.css")
+
+    body(ng-app='app')
+        //include currentUser
+        block main-content
+        include scripts
