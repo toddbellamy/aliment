@@ -1,5 +1,28 @@
 .container
-    h1 {{client.lastName}}
-    .row
-        .col-md-6
-            h3(ng-show="client.lastName") Name
+    .well
+        form.form-horizontal(name="clientForm")
+            fieldset
+                .form-group
+                    label.col-md-2.control-label(for="lastName") Last Name
+                    .col-md-10
+                        input.form-control(name="lastName", type="text", placeholder="Last Name", ng-model="client.lastName", required)
+                        span.error(ng-show="clientForm.lastName.$error.required") Please enter a Last Name.
+                .form-group
+                    label.col-md-2.control-label(for="firstName") First Name
+                    .col-md-10
+                        input.form-control(name="firstName", type="text", placeholder="First Name", ng-model="client.firstName", required)
+                        span.error(ng-show="clientForm.firstName.$error.required") Please enter a First Name.
+                .form-group
+                    label.col-md-2.control-label(for="dateOfBirth") Date Of Birth
+                    .col-md-10
+                        input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", required)
+                        span.error(ng-show="clientForm.dateOfBirth.$error.required") Please enter a Date Of Birth.
+                .form-group
+                    .col-md-4.col-md-offset-2
+                        .pull-left
+                            button.btn.btn-primary(ng-click="new()", ng-disabled="isDirty()") New
+                    .col-md-6
+                        .pull-right
+                            button.btn.btn-primary(ng-click="save()", ng-disabled="!canSave()") Submit
+                            | &nbsp;
+                            button.btn.btn-default(ng-click="cancel()", ng-disabled="!isDirty()") Cancel

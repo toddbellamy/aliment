@@ -10,7 +10,6 @@
             tr
                 th Name
         tbody
-            tr(ng-repeat="client in clients | filter:searchText | orderBy:sorderOrder")
+            tr(ng-repeat="client in clients | filter:searchText | orderBy:sortOrder")
                 td
-                    a(href="/clients/{{client._id}}") {{client.lastname}}
-                    
+                    a(href="/clients/{{client._id}}") {{client.lastName + ', ' + client.firstName}}

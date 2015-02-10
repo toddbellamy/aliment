@@ -10,8 +10,9 @@ module.exports = function(app) {
     //app.post('/api/users', users.createUser);
     //app.put('/api/users', users.updateUser);
 
-    app.get('/api/clients', clients.getClients);
-    app.get('/api/clients/:id', clients.getClientById);
+    app.get('/api/clients/:id', clients.getClients);
+    app.get('/api/clients/', clients.getClients);
+    app.post('/api/clients/', clients.saveClient);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);
