@@ -1,6 +1,16 @@
 
 var Client = require('mongoose').model('Client');
 
+exports.getClient = function(req, res) {
+     var query = (req.params.id == 0 ? {} : {_id:req.params.id});
+
+     Client.find(query).exec(function(err, collection) {
+        res.send(collection[0]);
+    });
+
+    return {};
+};
+
 exports.getClients = function(req, res) {
 
     if(req.query.id) {
