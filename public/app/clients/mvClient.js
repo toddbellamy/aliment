@@ -1,7 +1,7 @@
 
-angular.module('app').factory('mvClient', function($resource) {
+angular.module('app').factory('FamilyResource', function($resource) {
 
-    var ClientResource = $resource('/api/clients/:id', { id:'@_id' });
+    var FamilyResource = $resource('/api/families/:id', { id:'@_id' });
 
-    return ClientResource;
+    return FamilyResource;
 });

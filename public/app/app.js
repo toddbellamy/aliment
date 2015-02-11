@@ -29,6 +29,9 @@ angular.module('app').config(function($routeProvider, $locationProvider, $httpPr
         })
         .when('/clients/:id', { templateUrl: '/partials/clients/client-details',
             controller: 'mvClientDetailController'
+        })
+        .when('/families', { templateUrl: '/partials/families/family-list',
+            controller: 'FamilyListController'
         });
 
     $httpProvider.defaults.transformResponse.push(function(responseData) {

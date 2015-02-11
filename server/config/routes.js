@@ -1,6 +1,7 @@
 //var auth = require('./auth'),
 //    users = require('../controllers/users'),
-var   clients = require('../controllers/clients');
+var clients = require('../controllers/clients'),
+    families = require('../controllers/families');
 //    mongoose = require('mongoose'),
 //    User = mongoose.model('User');
 
@@ -13,6 +14,11 @@ module.exports = function(app) {
     app.get('/api/clients/:id', clients.getClient);
     app.get('/api/clients/', clients.getClients);
     app.post('/api/clients/:id', clients.saveClient);
+
+    app.get('/api/families/:id', families.getFamily);
+    app.get('/api/families/', families.getFamilies);
+    app.post('/api/families/:id', families.saveFamily);
+
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);
