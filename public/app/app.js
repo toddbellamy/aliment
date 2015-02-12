@@ -32,6 +32,9 @@ angular.module('app').config(function($routeProvider, $locationProvider, $httpPr
         })
         .when('/families', { templateUrl: '/partials/families/family-list',
             controller: 'FamilyListController'
+        })
+        .when('/families/:id', { templateUrl: '/partials/families/family-details',
+            controller: 'FamilyDetailController'
         });
 
     $httpProvider.defaults.transformResponse.push(function(responseData) {

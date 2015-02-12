@@ -1,0 +1,91 @@
+.container
+    .navbar.navbar-invers
+        .container
+            .navbar-header
+                .navbar-brand Family
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(ng-click="new()") New
+                    li
+                        a.btn.btn-md(href="/visits/") Visits
+    .well
+        form.form-horizontal(name="familyForm")
+            fieldset
+                .form-group
+                    label.col-md-2.control-label(for="familyStatus") Family Status
+                    .col-md-10
+                        //input.form-control(name="familyStatus", type="text", placeholder="Family Status", ng-model="family.familyStatus", required)
+                        select.form-control(name="familyStatus", ng-model="family.familyStatus")
+                            option(ng-repeat='status in familyStatuses', ng-selected="Family") {{status}}
+                .form-group
+                    label.col-md-2.control-label(for="dateAdded") Date Added
+                    .col-md-10
+                        input.form-control(name="dateAdded", type="date", placeholder="Date Added", ng-model="family.dateAdded" readonly)
+                .form-group
+                    label.col-md-2.control-label(for="address1") Address 1
+                    .col-md-10
+                        input.form-control(name="address1", type="text", placeholder="Address Line 1", ng-model="family.address1", required)
+                        span.error(ng-show="familyForm.address1.$dirty && familyForm.address1.$error.required") Please enter Address Line 1.
+                .form-group
+                    label.col-md-2.control-label(for="address2") Address 2
+                    .col-md-10
+                        input.form-control(name="address2", type="text", placeholder="Address Line 2", ng-model="family.address2")
+                .form-group
+                    label.col-md-2.control-label(for="city") City
+                    .col-md-10
+                        input.form-control(name="city", type="text", placeholder="City", ng-model="family.city", required)
+                        span.error(ng-show="familyForm.city.$dirty && familyForm.city.$error.required") Please enter City.
+                .form-group
+                    label.col-md-2.control-label(for="province") Province
+                    .col-md-10
+                        input.form-control(name="province", type="text", placeholder="Province", ng-model="family.province", required)
+                        span.error(ng-show="familyForm.province.$dirty && familyForm.province.$error.required") Please select a Province .
+                .form-group
+                    label.col-md-2.control-label(for="postal") Postal Code
+                    .col-md-10
+                        input.form-control(name="postal", type="text", placeholder="A0A 0A0", ng-model="family.postal", required pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]")
+                        span.error(ng-show="familyForm.postal.$dirty && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
+                .form-group
+                    label.col-md-2.control-label(for="phone1") Phone Number
+                    .col-md-10
+                        input.form-control(name="phone1", type="text", placeholder="999-999-9999", ng-model="family.phone1", required pattern="\\d{3}[\\-]\\d{3}[\\-]\\d{4}")
+                        span.error(ng-show="familyForm.phone1.$dirty && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999-999-9999).
+                .form-group
+                    label.col-md-2.control-label(for="totalMonthlyExpenses") Total Monthly Expenses
+                    .col-md-10
+                        input.form-control(name="totalMonthlyExpenses", type="text", placeholder="Total Monthly Expenses", ng-model="family.totalMonthlyExpenses", required pattern="\\d+(\\.\\d{2})?")
+                        span.error(ng-show="familyForm.totalMonthlyExpenses.$dirty && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.pattern)") Please enter valid Total Monthly Expenses.
+                .form-group
+                    label.col-md-2.control-label(for="totalMonthlyIncome") Total Monthly Income
+                    .col-md-10
+                        input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", required pattern="\\d+(\\.\\d{2})?")
+                        span.error(ng-show="familyForm.totalMonthlyIncome.$dirty && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.pattern)") Please enter valid Total Monthly Income.
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        label(for="proofOfIncomeProvided")
+                            input(type="checkbox", name="proofOfIncomeProvided", ng-model="family.proofOfIncomeProvided")
+                            = "  Proof of Income Provided"
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        label(for="proofOfExpensesProvided")
+                            input(type="checkbox", name="proofOfExpensesProvided", ng-model="family.proofOfExpensesProvided")
+                            = "  Proof of Expenses Provided"
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        label(for="proofOfAddressProvided")
+                            input(type="checkbox", name="proofOfAddressProvided", ng-model="family.proofOfAddressProvided")
+                            = "  Proof of Address Provided"
+                .form-group
+                    label.col-md-2.control-label(for="registeredDate") Registered Date
+                    .col-md-10
+                        input.form-control(name="registeredDate", type="date", placeholder="Registered Date", ng-model="family.registeredDate", readonly)
+                        span.error(ng-show="familyForm.registeredDate.$dirty && familyForm.registeredDate.$error.required") Please enter Registered Date.
+                .form-group
+                    .col-md-6.col-md-offset-2
+                        button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New
+                    .col-md-4
+                        .pull-right
+                            button.btn.btn-primary(ng-click="save()", ng-disabled="!canSave()") Submit
+                            | &nbsp;
+                            button.btn.btn-default(ng-click="cancel()", ng-disabled="!canCancel()") Cancel

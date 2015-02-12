@@ -1,10 +1,19 @@
 .container
+    .navbar.navbar-invers
+        .container
+            .navbar-header
+                .navbar-brand Client
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(ng-click="new()") New
+                    li
+                        a.btn.btn-md(href="/family/") Family
+                    li
+                        a.btn.btn-md(href="/visits/") Visits
     .well
         form.form-horizontal(name="clientForm")
             fieldset
-                .form-group
-                    .col-md-10.col-md-offset-2
-                        label.lg-label Client
                 .form-group
                     label.col-md-2.control-label(for="lastName") Last Name
                     .col-md-10

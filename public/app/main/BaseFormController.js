@@ -16,7 +16,18 @@ function BaseFormController($scope, $routeParams) {
         $scope[$scope.documentName] = $scope.document = data;
     };
 
-    $scope.documentResource.get({id:$routeParams.id }).$promise.then(dataLoaded);
+    var createNewDocument = function() {
+        $scope[$scope.documentName] = $scope.document = new $scope.documentResource(
+            $scope.documentDefaults ? $scope.documentDefaults() : {}
+        );
+    };
+
+    if($routeParams.id && $routeParams.id == "new") {
+        createNewDocument();
+    }
+    else {
+        $scope.documentResource.get({id: $routeParams.id}).$promise.then(dataLoaded);
+    }
 
     $scope.documentId = function () {
         return ($scope.document && $scope.document._id ? $scope.document._id : '0' );
@@ -58,8 +69,10 @@ function BaseFormController($scope, $routeParams) {
     };
 
     $scope.new = function() {
-        $scope[$scope.documentName] = $scope.document = new $scope.documentResource();
+        createNewDocument();
     };
+
+
 
 }
 

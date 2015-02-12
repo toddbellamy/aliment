@@ -1,10 +1,18 @@
 .container.top-padding-med
-    .pull-right
-        form.form-inline
-            .form-group
-                input.form-control(ng-model="searchText", placeholder="Filter")
-            .form-group.margin-left-med
-                select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    .navbar.navbar-invers
+        .container
+            .navbar-header
+                .navbar-brand Families
+            .navbar-collapse.collapse
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(href="/families/new" ng-click="new()") New
+                ul.nav.navbar-nav.pull-right
+                    li
+                        input.form-control(ng-model="searchText", placeholder="Filter")
+                    li
+                        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+
     table.table.table-hover.table-striped.table-condensed
         thead
             tr

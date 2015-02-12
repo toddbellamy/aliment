@@ -14,11 +14,12 @@ module.exports = function(app) {
     app.get('/api/clients/:id', clients.getClient);
     app.get('/api/clients/', clients.getClients);
     app.post('/api/clients/:id', clients.saveClient);
+    app.post('/api/clients/', clients.saveClient);
 
     app.get('/api/families/:id', families.getFamily);
     app.get('/api/families/', families.getFamilies);
     app.post('/api/families/:id', families.saveFamily);
-
+    app.post('/api/families/', families.saveFamily);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);

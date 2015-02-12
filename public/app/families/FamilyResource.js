@@ -1,3 +1,7 @@
-/**
- * Created by todd on 15-02-10.
- */
+
+angular.module('app').factory('FamilyResource', function($resource) {
+
+    var FamilyResource = $resource('/api/families/:id', { id:'@_id'});
+
+    return FamilyResource;
+});
