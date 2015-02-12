@@ -13,15 +13,20 @@
         form.form-horizontal(name="familyForm")
             fieldset
                 .form-group
-                    label.col-md-2.control-label(for="familyStatus") Family Status
+                    label.col-md-2.control-label(for="primaryClient") Primary Contact
                     .col-md-10
-                        //input.form-control(name="familyStatus", type="text", placeholder="Family Status", ng-model="family.familyStatus", required)
-                        select.form-control(name="familyStatus", ng-model="family.familyStatus")
-                            option(ng-repeat='status in familyStatuses', ng-selected="Family") {{status}}
+                        select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client as client.firstName for client in family.clients")
+
+                        //option(ng-repeat='client in family.clients', ng-selected="Family") {{client}}
                 .form-group
                     label.col-md-2.control-label(for="dateAdded") Date Added
                     .col-md-10
                         input.form-control(name="dateAdded", type="date", placeholder="Date Added", ng-model="family.dateAdded" readonly)
+                .form-group
+                    label.col-md-2.control-label(for="familyStatus") Family Status
+                    .col-md-10
+                        select.form-control(name="familyStatus", ng-model="family.familyStatus")
+                            option(ng-repeat='status in familyStatuses', ng-selected="Family") {{status}}
                 .form-group
                     label.col-md-2.control-label(for="address1") Address 1
                     .col-md-10

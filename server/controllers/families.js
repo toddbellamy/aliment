@@ -4,8 +4,12 @@ var Family = require('mongoose').model('Family');
 exports.getFamily = function(req, res) {
     var query = (req.params.id == 0 ? {} : {_id:req.params.id});
 
-    Family.find(query).exec(function(err, collection) {
-        res.send(collection[0]);
+    Family.findOne(query)
+        .populate('primaryClient')
+        .populate('clients')
+        .exec(function(err, document) {
+
+            res.send(document);
     });
 
     return {};
@@ -28,7 +32,9 @@ exports.getFamilies = function(req, res) {
 };
 
 exports.saveFamily = function(req, res) {
+
     var familyData = req.body;
+
     var updateData = {
         familyStatus:familyData.familyStatus,
         dateAdded:familyData.dateAdded,
@@ -43,7 +49,9 @@ exports.saveFamily = function(req, res) {
         proofOfIncomeProvided:familyData.proofOfIncomeProvided,
         proofOfExpensesProvided:familyData.proofOfExpensesProvided,
         proofOfAddressProvided:familyData.proofOfAddressProvided,
-        registeredDate:familyData.registeredDate
+        registeredDate:familyData.registeredDate,
+        primaryClient:req.body.primaryClient._id,
+        clients:req.body.clients.map(function(cl) { return cl._id; })
     };
 
     if (!familyData._id) {
