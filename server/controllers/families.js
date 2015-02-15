@@ -1,5 +1,6 @@
 
 var Family = require('mongoose').model('Family');
+var Client = require('mongoose').model('Client');
 
 exports.getFamily = function(req, res) {
     var query = (req.params.id == 0 ? {} : {_id:req.params.id});
@@ -33,49 +34,88 @@ exports.getFamilies = function(req, res) {
 
 exports.saveFamily = function(req, res) {
 
-    var familyData = req.body;
+    var data = req.body;
 
-    var updateData = {
-        familyStatus:familyData.familyStatus,
-        dateAdded:familyData.dateAdded,
-        address1:familyData.address1,
-        address2:familyData.address2,
-        city:familyData.city,
-        province:familyData.province,
-        postal:familyData.postal,
-        phone1:familyData.phone1,
-        totalMonthlyExpenses:familyData.totalMonthlyExpenses,
-        totalMonthlyIncome:familyData.totalMonthlyIncome,
-        proofOfIncomeProvided:familyData.proofOfIncomeProvided,
-        proofOfExpensesProvided:familyData.proofOfExpensesProvided,
-        proofOfAddressProvided:familyData.proofOfAddressProvided,
-        registeredDate:familyData.registeredDate,
-        primaryClient:req.body.primaryClient._id,
-        clients:req.body.clients.map(function(cl) { return cl._id; })
+    var family = {
+        familyStatus:data.familyStatus,
+        dateAdded:data.dateAdded,
+        address1:data.address1,
+        address2:data.address2,
+        city:data.city,
+        province:data.province,
+        postal:data.postal,
+        phone1:data.phone1,
+        totalMonthlyExpenses:data.totalMonthlyExpenses,
+        totalMonthlyIncome:data.totalMonthlyIncome,
+        proofOfIncomeProvided:data.proofOfIncomeProvided,
+        proofOfExpensesProvided:data.proofOfExpensesProvided,
+        proofOfAddressProvided:data.proofOfAddressProvided,
+        registeredDate:data.registeredDate,
+        clients:[]
     };
 
-    if (!familyData._id) {
-        Family.create(updateData, function(err, family) {
-            if (err) {
-                if (err.toString().indexOf('E11000') > -1) {
-                    err = new Error('Duplicate Family');
+    var handleError = function(err) {
+        if (err.toString().indexOf('E11000') > -1) {
+            err = new Error('Duplicate Family');
+        }
+        res.status(400);
+        return res.send({reason: err.toString()});
+    };
+
+    var saveFamily = function() {
+        if (data._id) {
+            Family.update({_id: data._id}, family, function (err) {
+                if (err) {
+                    return handleError(err);
                 }
-                res.status(400);
-                return res.send({reason: err.toString()});
-            }
-            return res.send(family);
-        });
-    }
-    else {
-        Family.update({_id: familyData._id}, updateData, function (err) {
-            if (err) {
-                if (err.toString().indexOf('E11000') > -1) {
-                    err = new Error('Duplicate Family');
+                return res.status(200).end();
+            });
+        }
+        else {
+            Family.create(family, function(err, savedFamily) {
+                if (err) {
+                    return handleError(err);
                 }
-                res.status(400);
-                return res.send({reason: err.toString()});
-            }
-            return res.status(200).end();
-        });
-    }
+                savedFamily.populate('clients primaryClient', function(err, doc) {
+                    return res.send(savedFamily);
+                });
+            });
+        }
+    };
+
+    data.clients.forEach(function(client) {
+
+        if (!client._id || client._id == 0) {
+            Client.create({lastName:client.lastName, firstName:client.firstName}, function(err, savedClient) {
+                if (err) {
+                    return handleError(err);
+                }
+
+                if(data.primaryClient._id  == 0 &&
+                    data.primaryClient.lastName == client.lastName && data.primaryClient.firstName == client.firstName) {
+                    family.primaryClient = savedClient._id;
+                }
+                family.clients.push(savedClient._id);
+                if(family.clients.length === data.clients.length) {
+                    saveFamily();
+                }
+            });
+        }
+        else {
+            Client.update({_id: client._id}, client, function (err, savedClient) {
+                if (err) {
+                    handleError(err);
+                }
+
+                if(data.primaryClient._id  == client._id) {
+                    family.primaryClient = client._id;
+                }
+                family.clients.push(client._id);
+                if(family.clients.length === data.clients.length) {
+                    saveFamily();
+                }
+            });
+        }
+    });
+
 };

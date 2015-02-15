@@ -15,9 +15,25 @@
                 .form-group
                     label.col-md-2.control-label(for="primaryClient") Primary Contact
                     .col-md-10
-                        select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client as client.firstName for client in family.clients")
-
-                        //option(ng-repeat='client in family.clients', ng-selected="Family") {{client}}
+                        select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id")
+                .form-group
+                    label.col-md-2.control-label
+                    .col-md-10
+                        button.btn.btn-md(ng-click="addContact()") Add Contact
+                .form-group
+                    label.col-md-2.control-label Secondary Contacts
+                    .col-md-10
+                        table
+                            thead
+                                tr
+                                    th Last Name
+                                    th First Name
+                            tbody
+                                tr(ng-repeat="client in family.clients")
+                                    td
+                                        input.form-control(ng-model="client.lastName" required)
+                                    td
+                                        input.form-control(ng-model="client.firstName" required)
                 .form-group
                     label.col-md-2.control-label(for="dateAdded") Date Added
                     .col-md-10
