@@ -28,12 +28,25 @@
                                 tr
                                     th Last Name
                                     th First Name
+                                    th Date of Birth
                             tbody
                                 tr(ng-repeat="client in family.clients")
                                     td
-                                        input.form-control(ng-model="client.lastName" required)
+                                        input.form-control(name="clientLastName" ng-model="client.lastName" required)
                                     td
-                                        input.form-control(ng-model="client.firstName" required)
+                                        input.form-control(name="clientFirstName" ng-model="client.firstName" required)
+                                    td
+                                        input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" required)
+                                    td
+                                        button.btn.btn-sm(ng-click="removeContact(client)" ng-show="client._id == 0") X
+                            tfoot
+                                tr
+                                    td
+                                        span.error(ng-show="familyForm.clientLastName.$touched && familyForm.clientLastName.$error.required") Please enter a Last Name
+                                    td
+                                        span.error(ng-show="familyForm.clientFirstName.$touched && familyForm.clientFirstName.$error.required") Please enter a First Name.
+                                    td
+                                        span.error(ng-show="familyForm.clientDateOfBirth.$touched && familyForm.clientDateOfBirth.$error.required") Please enter a Date Of Birth.
                 .form-group
                     label.col-md-2.control-label(for="dateAdded") Date Added
                     .col-md-10

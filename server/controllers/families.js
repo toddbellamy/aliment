@@ -68,7 +68,16 @@ exports.saveFamily = function(req, res) {
                 if (err) {
                     return handleError(err);
                 }
-                return res.status(200).end();
+                //res.status(200);
+                //return res.send(family);
+                Family.findOne({_id:data._id})
+                    .populate('primaryClient')
+                    .populate('clients')
+                    .exec(function(err, savedFamily) {
+                        res.status(200);
+                        res.send(savedFamily);
+                    });
+
             });
         }
         else {
@@ -79,6 +88,7 @@ exports.saveFamily = function(req, res) {
                 savedFamily.populate('clients primaryClient', function(err, doc) {
                     return res.send(savedFamily);
                 });
+
             });
         }
     };
@@ -86,7 +96,7 @@ exports.saveFamily = function(req, res) {
     data.clients.forEach(function(client) {
 
         if (!client._id || client._id == 0) {
-            Client.create({lastName:client.lastName, firstName:client.firstName}, function(err, savedClient) {
+            Client.create({lastName:client.lastName, firstName:client.firstName, dateOfBirth:client.dateOfBirth}, function(err, savedClient) {
                 if (err) {
                     return handleError(err);
                 }
@@ -102,7 +112,7 @@ exports.saveFamily = function(req, res) {
             });
         }
         else {
-            Client.update({_id: client._id}, client, function (err, savedClient) {
+            Client.update({_id: client._id}, client, function (err) {
                 if (err) {
                     handleError(err);
                 }

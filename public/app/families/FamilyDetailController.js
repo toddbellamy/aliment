@@ -30,7 +30,23 @@ function FamilyDetailController($scope, $routeParams, FamilyResource) {
         if(!$scope.family.clients) {
             $scope.family.clients = [];
         }
+
+        if($scope.family.clients.length > 0) {
+            if(!$scope.family.clients[$scope.family.clients.length - 1].lastName ||
+                !$scope.family.clients[$scope.family.clients.length - 1].firstName ||
+                !$scope.family.clients[$scope.family.clients.length - 1].dateOfBirth) {
+                return;
+            }
+        }
+
         $scope.family.clients.push({ lastName:'', firstName:'', _id:'000000000000000000000000' });
+    };
+
+    $scope.removeContact = function(client) {
+      if($scope.family.clients && $scope.family.clients.length > 0) {
+          var index = $scope.family.clients.indexOf(client)
+          $scope.family.clients.splice(index, 1);
+      }
     };
 
 }
