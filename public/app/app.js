@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ngRoute']);
+angular.module('app', ['ngResource', 'ngRoute', 'ui.utils']);
 
 angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider) {
     var routeRoleChecks = {
@@ -13,28 +13,25 @@ angular.module('app').config(function($routeProvider, $locationProvider, $httpPr
     $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', { templateUrl: '/partials/main/main',
-            controller: 'mvMainController'
+            controller: 'MainController'
         })
         .when('/admin/users', { templateUrl: '/partials/admin/user-list',
             controller: 'mvUserListController', resolve: routeRoleChecks.admin
         })
-        .when('/signup', { templateUrl: '/partials/account/signup',
-            controller: 'mvSignupController'
-        })
-        .when('/profile', { templateUrl: '/partials/account/profile',
-            controller: 'mvProfileController', resolve: routeRoleChecks.user
-        })
         .when('/clients', { templateUrl: '/partials/clients/client-list',
-            controller: 'mvClientListController'
+            controller: 'ClientListController'
         })
         .when('/clients/:id', { templateUrl: '/partials/clients/client-details',
-            controller: 'mvClientDetailController'
+            controller: 'ClientDetailController'
         })
         .when('/families', { templateUrl: '/partials/families/family-list',
             controller: 'FamilyListController'
         })
         .when('/families/:id', { templateUrl: '/partials/families/family-details',
             controller: 'FamilyDetailController'
+        })
+        .when('/visits/:id', { templateUrl: '/partials/visits/visit-list',
+            controller: 'VisitListController'
         });
 
     $httpProvider.defaults.transformResponse.push(function(responseData) {

@@ -24,12 +24,12 @@
         tbody
             tr(ng-repeat="family in families | filter:searchText | orderBy:sortOrder")
                 td
-                    a(href="/families/{{family._id}}") {{family.phone1}}
+                    a(href="/families/{{family._id}}") {{family.phone1 | tel}}
                 td
                     a(href="/families/{{family._id}}") {{family.address1 + ', ' + family.address2}}
                 td
                     a(href="/families/{{family._id}}") {{family.city}}
                 td
-                    a(href="/families/{{family._id}}") {{family.postal}}
+                    a(href="/families/{{family._id}}") {{family.postal | postal}}
                 td
                     a(href="/families/{{family._id}}") {{family.dateAdded | date}}

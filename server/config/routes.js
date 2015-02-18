@@ -2,6 +2,7 @@
 //    users = require('../controllers/users'),
 var clients = require('../controllers/clients'),
     families = require('../controllers/families');
+    visits = require('../controllers/visits');
 //    mongoose = require('mongoose'),
 //    User = mongoose.model('User');
 
@@ -20,6 +21,9 @@ module.exports = function(app) {
     app.get('/api/families/', families.getFamilies);
     app.post('/api/families/:id', families.saveFamily);
     app.post('/api/families/', families.saveFamily);
+
+    app.get('/api/visits/:id', visits.getFamilyWithVisits);
+    app.post('/api/visits/:id', visits.saveVisits);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);

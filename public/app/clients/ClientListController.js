@@ -1,6 +1,6 @@
-angular.module('app').controller('mvClientListController', function($scope, mvClient) {
+angular.module('app').controller('ClientListController', function($scope, ClientResource) {
 
-    $scope.clients = mvClient.query();
+    $scope.clients = ClientResource.query();
 
     $scope.sortOptions = [{value:"lastName",text: "Sort by Last Name"},
         {value: "firstName",text: "Sort by First Name"}];

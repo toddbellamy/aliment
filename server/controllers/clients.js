@@ -19,7 +19,9 @@ exports.getClients = function(req, res) {
         });
     }
     else {
-        Client.find({}).exec(function (err, collection) {
+        Client.find({})
+        .populate('family', 'address1 city')
+        .exec(function(err, collection) {
             res.send(collection);
         });
     }

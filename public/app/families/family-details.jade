@@ -8,7 +8,7 @@
                     li
                         a.btn.btn-md(ng-click="new()") New
                     li
-                        a.btn.btn-md(href="/visits/") Visits
+                        a.btn.btn-md(href="/visits/{{family._id}}") Visits
     .well
         form.form-horizontal(name="familyForm")
             fieldset
@@ -60,7 +60,7 @@
                     label.col-md-2.control-label(for="address1") Address 1
                     .col-md-10
                         input.form-control(name="address1", type="text", placeholder="Address Line 1", ng-model="family.address1", required)
-                        span.error(ng-show="familyForm.address1.$dirty && familyForm.address1.$error.required") Please enter Address Line 1.
+                        span.error(ng-show="familyForm.address1.$touched && familyForm.address1.$error.required") Please enter Address Line 1.
                 .form-group
                     label.col-md-2.control-label(for="address2") Address 2
                     .col-md-10
@@ -69,47 +69,48 @@
                     label.col-md-2.control-label(for="city") City
                     .col-md-10
                         input.form-control(name="city", type="text", placeholder="City", ng-model="family.city", required)
-                        span.error(ng-show="familyForm.city.$dirty && familyForm.city.$error.required") Please enter City.
+                        span.error(ng-show="familyForm.city.$touched && familyForm.city.$error.required") Please enter City.
                 .form-group
                     label.col-md-2.control-label(for="province") Province
                     .col-md-10
-                        input.form-control(name="province", type="text", placeholder="Province", ng-model="family.province", required)
-                        span.error(ng-show="familyForm.province.$dirty && familyForm.province.$error.required") Please select a Province .
+                        //input.form-control(name="province", type="text", placeholder="Province", ng-model="family.province", required)
+                        select.form-control(name="province", ng-model="family.province" ng-options="prov for prov in provinceCodes")
+                        //span.error(ng-show="familyForm.province.$touched && familyForm.province.$error.required") Please select a Province .
                 .form-group
                     label.col-md-2.control-label(for="postal") Postal Code
                     .col-md-10
-                        input.form-control(name="postal", type="text", placeholder="A0A 0A0", ng-model="family.postal", required pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]")
-                        span.error(ng-show="familyForm.postal.$dirty && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
+                        input.form-control(name="postal", type="text", ng-model="family.postal", ui-mask="A9A 9A9" required)
+                        span.error(ng-show="familyForm.postal.$touched && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
                 .form-group
                     label.col-md-2.control-label(for="phone1") Phone Number
                     .col-md-10
-                        input.form-control(name="phone1", type="text", placeholder="999-999-9999", ng-model="family.phone1", required pattern="\\d{3}[\\-]\\d{3}[\\-]\\d{4}")
-                        span.error(ng-show="familyForm.phone1.$dirty && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999-999-9999).
+                        input.form-control(name="phone1", type="text", ng-model="family.phone1", ui-mask="(999) 999-9999" required)
+                        span.error(ng-show="familyForm.phone1.$touched && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999) 999-9999).
                 .form-group
                     label.col-md-2.control-label(for="totalMonthlyExpenses") Total Monthly Expenses
                     .col-md-10
                         input.form-control(name="totalMonthlyExpenses", type="text", placeholder="Total Monthly Expenses", ng-model="family.totalMonthlyExpenses", required pattern="\\d+(\\.\\d{2})?")
-                        span.error(ng-show="familyForm.totalMonthlyExpenses.$dirty && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.pattern)") Please enter valid Total Monthly Expenses.
+                        span.error(ng-show="familyForm.totalMonthlyExpenses.$touched && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.pattern)") Please enter valid Total Monthly Expenses.
                 .form-group
                     label.col-md-2.control-label(for="totalMonthlyIncome") Total Monthly Income
                     .col-md-10
                         input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", required pattern="\\d+(\\.\\d{2})?")
-                        span.error(ng-show="familyForm.totalMonthlyIncome.$dirty && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.pattern)") Please enter valid Total Monthly Income.
+                        span.error(ng-show="familyForm.totalMonthlyIncome.$touched && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.pattern)") Please enter valid Total Monthly Income.
                 .form-group
                     .col-md-10.col-md-offset-2
-                        label(for="proofOfIncomeProvided")
+                        label
                             input(type="checkbox", name="proofOfIncomeProvided", ng-model="family.proofOfIncomeProvided")
-                            = "  Proof of Income Provided"
+                            | Proof of Income Provided
                 .form-group
                     .col-md-10.col-md-offset-2
-                        label(for="proofOfExpensesProvided")
+                        label
                             input(type="checkbox", name="proofOfExpensesProvided", ng-model="family.proofOfExpensesProvided")
-                            = "  Proof of Expenses Provided"
+                            | Proof of Expenses Provided
                 .form-group
                     .col-md-10.col-md-offset-2
-                        label(for="proofOfAddressProvided")
+                        label
                             input(type="checkbox", name="proofOfAddressProvided", ng-model="family.proofOfAddressProvided")
-                            = "  Proof of Address Provided"
+                            | Proof of Address Provided
                 .form-group
                     label.col-md-2.control-label(for="registeredDate") Registered Date
                     .col-md-10

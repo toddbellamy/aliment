@@ -2,7 +2,7 @@
     .navbar.navbar-invers
         .container
             .navbar-header
-                .navbar-brand Families
+                .navbar-brand Clients
             .navbar-collapse.collapse
                 ul.nav.navbar-nav.pull-left
                     li
@@ -17,7 +17,13 @@
         thead
             tr
                 th Name
+                th Date of Birth
+                th Family Address
         tbody
             tr(ng-repeat="client in clients | filter:searchText | orderBy:sortOrder")
                 td
                     a(href="/clients/{{client._id}}") {{client.lastName + ', ' + client.firstName}}
+                td
+                    a(href="/clients/{{client._id}}") {{client.dateOfBirth | date}}
+                td
+                    a(href="/families/{{client.family._id}}") {{client.family.address1 + ', ' + client.family.city}}

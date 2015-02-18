@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     clientModel = require('../models/Client'),
-    familyModel = require('../models/Family'),
-    visitModel = require('../models/Visit');
+    visitModel = require('../models/Visit'),
+    familyModel = require('../models/Family');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -11,8 +11,8 @@ module.exports = function(config) {
         console.log('aliment db opened');
     });
 
-    clientModel.createMockClients();
+    //lientModel.createMockClients();
     familyModel.createMockFamilies();
-    visitModel.createMockVisits();
+    //visitModel.createMockVisits();
 };
 

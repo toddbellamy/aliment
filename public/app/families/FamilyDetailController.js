@@ -12,8 +12,6 @@ function FamilyDetailController($scope, $routeParams, FamilyResource) {
             address2:'',
             city: 'Bowmanville',
             province: 'ON',
-            postal:'L1L 9A9',
-            phone1:'905-555-1234',
             phone2:'',
             totalMonthlyExpenses:1000,
             totalMonthlyIncome:1000,

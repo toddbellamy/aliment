@@ -17,37 +17,90 @@ var familySchema = mongoose.Schema({
     proofOfAddressProvided: {type: Boolean, required: '{PATH} is required!'},
     registeredDate: {type: Date },
     clients: [{ type: mongoose.Schema.ObjectId, ref: 'Client' }],
-    primaryClient: { type: mongoose.Schema.ObjectId, ref: 'Client'}
+    primaryClient: { type: mongoose.Schema.ObjectId, ref: 'Client'},
+    visits: [{ type:mongoose.Schema.ObjectId, ref:'Visit' }]
 });
 
 var Family = mongoose.model('Family', familySchema);
+var Visit = mongoose.model('Visit');
 var Client = mongoose.model('Client');
+
 
 function createMockFamilies() {
     Family.find({}).exec(function(err, collection) {
         if(collection.length === 0) {
-            Client.where({lastName:'Smith', firstName:'John'}).findOne(function(error, primaryClient) {
-                Client.where({lastName:'Smith'}).find(function(error, famClients) {
 
-                    Family.create({
-                        familyStatus: 'Family',
-                        dateAdded: new Date('10/5/2013'),
-                        address1: '10 Maple St',
-                        address2: 'Apt A',
-                        city: 'Oshawa',
-                        province: 'ON',
-                        postal: 'L1L 1L1',
-                        phone1: '905 777 1234',
-                        totalMonthlyExpenses: 1150.00,
-                        totalMonthlyIncome: 1275.00,
-                        proofOfIncomeProvided: true,
-                        proofOfExpensesProvided: true,
-                        proofOfAddressProvided: true,
-                        registeredDate: Date('10/5/2013'),
-                        clients: [famClients[0]._id, famClients[1]._id, famClients[2]._id ],
-                        primaryClient: primaryClient._id
+            Family.create({
+                familyStatus: 'Family',
+                dateAdded: new Date('10/5/2013').toISOString(),
+                address1: '10 Maple St',
+                address2: 'Apt A',
+                city: 'Oshawa',
+                province: 'ON',
+                postal: 'L1L 1L1',
+                phone1: '9057771234',
+                totalMonthlyExpenses: 1150.00,
+                totalMonthlyIncome: 1275.00,
+                proofOfIncomeProvided: true,
+                proofOfExpensesProvided: true,
+                proofOfAddressProvided: true,
+                registeredDate: new Date('10/5/2013').toISOString()
+            }, function(err, family) {
+                if(family) {
+
+                    var clients = [{
+                        firstName: 'John', lastName: 'Smith', dateOfBirth: new Date('10/10/1977').toISOString()
+                    }, {
+                        firstName: 'Jane', lastName: 'Smith', dateOfBirth: new Date('9/5/1979').toISOString()
+                    },{
+                        firstName: 'Billy', lastName: 'Smith', dateOfBirth: new Date('5/5/2010').toISOString()
+                    }];
+
+                    Client.create(clients, function (err) {
+                        family.clients = [];
+                        for(var i=1; i<arguments.length; i++) {
+                            var client = arguments[i];
+                            family.clients.push(client);
+                            client.family = family;
+                            client.save();
+                        }
+                        var primaryClient = arguments[1];
+                        family.primaryClient = arguments[1];
+                        family.save(function(err, family) {
+                            var error = err;
+
+
+                            var visits = [{
+                                    date: new Date('1/12/2013').toISOString(), value: 18.00, reusableBagGiven:false, verification: 'Joan', storeVoucher:'', comments:'', foodVoucher:'', approvedBy:'',
+                                    client: primaryClient //, family:family
+                                }, {
+                                    date: new Date('3/8/2012').toISOString(), value: 12.00, reusableBagGiven:false, verification: 'Mary', storeVoucher:'', comments:'', foodVoucher:'', approvedBy:'',
+                                    client: primaryClient //, family:family
+                                }, {
+                                    date: new Date('7/15/2013').toISOString(), value: 20.00, reusableBagGiven:false, verification: 'Joan', storeVoucher:'', comments:'', foodVoucher:'', approvedBy:'',
+                                    client: primaryClient //, family:family
+                                }];
+
+                            Visit.create(visits, function(err) {
+                                family.visits = [];
+                                primaryClient.visits = [];
+                                for(var i=1; i<arguments.length; i++) {
+                                    var visit = arguments[i];
+                                    family.visits.push(visit);
+                                    //primaryClient.visits.push(visit);
+                                }
+
+                                family.save(function(err) {
+                                    var e = err;
+                                });
+
+                                //primaryClient.save(function(err) {
+                                //    var e = err;
+                                //});
+                            });
+                        });
                     });
-                });
+                }
             });
         }
     });
