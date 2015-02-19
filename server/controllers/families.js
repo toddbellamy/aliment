@@ -19,12 +19,15 @@ exports.getFamily = function(req, res) {
 exports.getFamilies = function(req, res) {
 
     if(req.query.id) {
-        Family.find({_id:req.query.id}).exec(function(err, collection) {
+        Family.find({_id:req.query.id})
+            .populate('primaryClient')
+            .exec(function(err, collection) {
             res.send(collection);
         });
     }
     else {
-        Family.find({}).exec(function (err, collection) {
+        Family.find({}).populate('primaryClient')
+            .exec(function (err, collection) {
             res.send(collection);
         });
     }
@@ -68,8 +71,6 @@ exports.saveFamily = function(req, res) {
                 if (err) {
                     return handleError(err);
                 }
-                //res.status(200);
-                //return res.send(family);
                 Family.findOne({_id:data._id})
                     .populate('primaryClient')
                     .populate('clients')
@@ -96,7 +97,7 @@ exports.saveFamily = function(req, res) {
     data.clients.forEach(function(client) {
 
         if (!client._id || client._id == 0) {
-            Client.create({lastName:client.lastName, firstName:client.firstName, dateOfBirth:client.dateOfBirth}, function(err, savedClient) {
+            Client.create({family:data._id, lastName:client.lastName, firstName:client.firstName, dateOfBirth:client.dateOfBirth}, function(err, savedClient) {
                 if (err) {
                     return handleError(err);
                 }

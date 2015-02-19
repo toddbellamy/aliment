@@ -1,17 +1,16 @@
 .container
-    .navbar.navbar-invers
-        .container
-            .navbar-header
-                .navbar-brand Client
-            .navbar-collapse.collapse
-                ul.nav.navbar-nav.pull-left
-                    li
-                        a.btn.btn-md(ng-click="new()") New
-                    li
-                        a.btn.btn-md(href="/family/") Family
-                    li
-                        a.btn.btn-md(href="/visits/") Visits
-    .well
+    .navbar
+        .navbar-header
+            .navbar-brand Client
+        .navbar-collapse.collapse
+            ul.nav.navbar-nav.pull-left
+                li
+                    a.btn.btn-md(ng-click="new()") New
+                li
+                    a.btn.btn-md(href="/families/{{client.family}}") Family
+                li
+                    a.btn.btn-md(href="/visits/") Visits
+    .well.well-sm
         form.form-horizontal(name="clientForm")
             fieldset
                 .form-group

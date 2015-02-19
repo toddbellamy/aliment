@@ -1,21 +1,21 @@
 .container.top-padding-med
-    .navbar.navbar-invers
-        .container
-            .navbar-header
-                .navbar-brand Families
-            .navbar-collapse.collapse
-                ul.nav.navbar-nav.pull-left
-                    li
-                        a.btn.btn-md(href="/families/new" ng-click="new()") New
-                ul.nav.navbar-nav.pull-right
-                    li
-                        input.form-control(ng-model="searchText", placeholder="Filter")
-                    li
-                        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    .navbar
+        .navbar-header
+            .navbar-brand Families
+        .navbar-collapse.collapse
+            ul.nav.navbar-nav.pull-left
+                li
+                    a.btn.btn-md(href="/families/new" ng-click="new()") New
+            ul.nav.navbar-nav.pull-right
+                li
+                    input.form-control(ng-model="searchText", placeholder="Filter")
+                li
+                    select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
-    table.table.table-hover.table-striped.table-condensed
+    table.table.table-hover.table-condensed
         thead
             tr
+                th Primary Contact
                 th Phone
                 th Address
                 th City
@@ -23,6 +23,8 @@
                 th Date Added
         tbody
             tr(ng-repeat="family in families | filter:searchText | orderBy:sortOrder")
+                td
+                    a(href="/families/{{family._id}}") {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName }}
                 td
                     a(href="/families/{{family._id}}") {{family.phone1 | tel}}
                 td

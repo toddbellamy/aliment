@@ -1,5 +1,5 @@
-.container.top-padding-med
-    .navbar.navbar-invers
+.container
+    .navbar
         .container
             .navbar-header
                 .navbar-brand Visits
@@ -13,76 +13,76 @@
                     li
                         select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
-    .well
-        form.form-horizontal(name="familyVisitsForm")
+
+    form.form-horizontal(name="familyVisitsForm")
+        .well.well-sm
             fieldset
                 .form-group
-                    label.col-md-3.control-label Family Primary Contact
+                    label.col-md-1.control-label
                     .col-md-5
-                        input.form-control(name="family.primaryClient.lastName", ng-model="family.primaryClient.lastName" readonly)
-                    .col-md-4
-                        input.form-control(name="family.primaryClient.firstName", ng-model="family.primaryClient.firstName" readonly)
+                        p.form-control-static {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName}}
+                    .col-md-6
+                        p.form-control-static {{family.phone1 | tel}}
                 .form-group
-                    label.col-md-3.control-label Family Address Phone
-                    .col-md-4
-                        input.form-control(name="family.address1", ng-model="family.address1" readonly)
-                    .col-md-3
-                        input.form-control(name="family.city", ng-model="family.city" readonly)
-                    .col-md-2
-                        input.form-control(name="family.phone1", ng-model="family.phone1" ui-mask="(999) 999-9999" readonly)
-                .form-group
-                    label.col-md-2 Visits
-                    .col-md-10
-                        button.btn.btn-md(ng-click="addVisit()") Add Visit
-            .form-group
-                    .col-md-12
-                        table
-                            thead
-                                tr
-                                    th Client
-                                    th Date
-                                    th Value
-                                    th Store Voucher
-                                    th Reusable Bag Given
-                                    th Comments
-                                    th Verification
-                                    th Food Voucher
-                                    th Approved By
-                            tbody
-                                tr(ng-repeat="visit in family.visits | filter:searchText | orderBy:sortOrder:reverseOrder()")
-                                    td
-                                        select.form-control(name="visitClient", ng-model="visit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" ng-disabled="visit._id != 0" required)
-                                    td
-                                        input.form-control(name="visitDate" type="date" ng-model="visit.date" readonly)
-                                    td
-                                        input.form-control(name="visitValue" ng-model="visit.value" ng-disabled="visit._id != 0" pattern="\\d+(\\.\\d{2})?")
-                                    td
-                                        input.form-control(name="visitStoreVoucher" ng-model="visit.storeVoucher" ng-disabled="visit._id != 0" )
-                                    td
-                                        input.form-control(name="visitReusableBagGiven" type="checkbox" ng-model="visit.reusableBagGiven" ng-disabled="visit._id != 0")
-                                    td
-                                        input.form-control(name="visitComments" ng-model="visit.comments" )
-                                    td
-                                        input.form-control(name="visitVerification" ng-model="visit.verification" required)
-                                    td
-                                        input.form-control(name="visitFoodVoucher" ng-model="visit.foodVoucher" ng-disabled="visit._id != 0")
-                                    td
-                                        input.form-control(name="visitApprovedBy" ng-model="visit.approvedBy" ng-disabled="visit._id != 0")
-                                    td
-                                        button.btn.btn-sm(ng-click="removeVisit(visit)" ng-show="visit._id == 0") X
-                            tfoot
-                                tr
-                                    td
-                                    td
-                                    td
-                                    td
-                                    td
-                                    td
-                                    td
-                                        span.error(ng-show="familyVisitsForm.visitVerification.$touched && familyVisitsForm.visitVerification.$error.required") Please provide Verification.
-                                    td
-                                    td
-                                    td
+                    label.col-md-1.control-label
+                    .col-md-5
+                        p.form-control-static {{family.address1 + ', ' + family.city + ', ' + family.province }}
+                    .col-md-6
+                        p.form-control-static {{family.postal }}
+        .form-group
+            span
+        .form-group
+            .col-md-12
+                button.btn.btn-md(ng-click="addVisit()") Add Visit
+        .form-group
+                .col-md-12
+                    table.table.table-condensed
+                        thead
+                            tr
+                                th.col-md-2 Client
+                                th.col-md-2 Date
+                                th Value
+                                th Store Voucher
+                                th Reusable Bag Given
+                                th Comments
+                                th Verification
+                                th Food Voucher
+                                th Approved By
+                        tbody
+                            tr(ng-repeat="visit in family.visits | filter:searchText | orderBy:sortOrder:reverseOrder()")
+                                td
+                                    select.form-control(name="visitClient", ng-model="visit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" ng-disabled="visit._id != 0" required)
+                                td
+                                   input.form-control(ng-value="visit.date | date" readonly)
+                                td
+                                    input.form-control(name="visitValue" ng-model="visit.value" ng-disabled="visit._id != 0" pattern="\\d+(\\.\\d{2})?")
+                                td
+                                    input.form-control(name="visitStoreVoucher" ng-model="visit.storeVoucher" ng-disabled="visit._id != 0" )
+                                td
+                                    input.form-control(name="visitReusableBagGiven" type="checkbox" ng-model="visit.reusableBagGiven" ng-disabled="visit._id != 0")
+                                td
+                                    input.form-control(name="visitComments" ng-model="visit.comments" )
+                                td
+                                    input.form-control(name="visitVerification" ng-model="visit.verification" required)
+                                td
+                                    input.form-control(name="visitFoodVoucher" ng-model="visit.foodVoucher" ng-disabled="visit._id != 0")
+                                td
+                                    input.form-control(name="visitApprovedBy" ng-model="visit.approvedBy" ng-disabled="visit._id != 0")
+                                td
+                                    button.btn.btn-sm(ng-click="removeVisit(visit)" ng-show="visit._id == 0") X
+                        tfoot
+                            tr
+                                td
+                                td
+                                td
+                                td
+                                td
+                                td
+                                td
+                                    span.error(ng-show="familyVisitsForm.visitVerification.$touched && familyVisitsForm.visitVerification.$error.required") Please provide Verification.
+                                td
+                                td
+                                td
             .form-group
                 .col-md-4.col-md-offset-8
                     .pull-right

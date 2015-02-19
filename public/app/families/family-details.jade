@@ -1,15 +1,14 @@
 .container
-    .navbar.navbar-invers
-        .container
-            .navbar-header
-                .navbar-brand Family
-            .navbar-collapse.collapse
-                ul.nav.navbar-nav.pull-left
-                    li
-                        a.btn.btn-md(ng-click="new()") New
-                    li
-                        a.btn.btn-md(href="/visits/{{family._id}}") Visits
-    .well
+    .navbar
+        .navbar-header
+            .navbar-brand Family
+        .navbar-collapse.collapse
+            ul.nav.navbar-nav.pull-left
+                li
+                    a.btn.btn-md(ng-click="new()") New
+                li
+                    a.btn.btn-md(href="/visits/{{family._id}}") Visits
+    .well.well-sm
         form.form-horizontal(name="familyForm")
             fieldset
                 .form-group
@@ -21,9 +20,9 @@
                     .col-md-10
                         button.btn.btn-md(ng-click="addContact()") Add Contact
                 .form-group
-                    label.col-md-2.control-label Secondary Contacts
+                    label.col-md-2.control-label Contacts
                     .col-md-10
-                        table
+                        table.table.table-condensed
                             thead
                                 tr
                                     th Last Name
