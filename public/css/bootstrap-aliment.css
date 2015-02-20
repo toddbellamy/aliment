@@ -1,6 +1,6 @@
 
-.form-group {
-    margin-bottom: 10px;
+.form-group-md {
+    margin-bottom: 15px;
 }
 
 .jumbotron {
@@ -32,4 +32,11 @@ section.content .navbar-header > .navbar-brand {
 
 table.table {
     margin-bottom:10px;
+}
+
+
+input.input-sm[type='checkbox'] {
+    width: 100%;
+    height: 18px;
+    margin-top:6px;
 }

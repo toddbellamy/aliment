@@ -1,4 +1,4 @@
-function BaseFormController($scope, $routeParams) {
+function BaseFormController($scope, $routeParams, Notifier) {
 
     //Note: $scope.formName, $scope.documentName, $scope.documentResource are assumed to exist.
     $scope.documentForm = null;
@@ -62,9 +62,11 @@ function BaseFormController($scope, $routeParams) {
         $scope.document.$save().then(
             function(doc) {
                 $scope.documentForm.$setPristine();
+                Notifier.notify('Saved successfully!');
             },
             function(reason) {
-                console.log('problem saving: ' + reason);
+                console.log('Problem saving: ' + reason);
+                Notifier.error('Problem saving: ' + reason);
             });
     };
 

@@ -1,4 +1,4 @@
-angular.module('app', ['ngResource', 'ngRoute', 'ui.utils']);
+angular.module('app', ['ngResource', 'ngRoute', 'ngAnimate', 'ui.utils']);
 
 angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider) {
     var routeRoleChecks = {

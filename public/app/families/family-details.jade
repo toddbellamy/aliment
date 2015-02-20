@@ -12,17 +12,19 @@
         form.form-horizontal(name="familyForm")
             fieldset
                 .form-group
-                    label.col-md-2.control-label(for="primaryClient") Primary Contact
-                    .col-md-10
+                    label.col-sm-2.control-label(for="primaryClient") Primary Contact
+                    .col-sm-10
                         select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id")
                 .form-group
-                    label.col-md-2.control-label
-                    .col-md-10
-                        button.btn.btn-md(ng-click="addContact()") Add Contact
+                    label.col-sm-2.control-label
+                    .col-sm-10
+                        button.btn.btn-sm(ng-click="addContact()") Add Contact
                 .form-group
-                    label.col-md-2.control-label Contacts
-                    .col-md-10
-                        table.table.table-condensed
+                    label.col-sm-2.control-label(ng-click="toggleContacts()") Contacts
+                        span.glyphicon.showhide-triangle(ng-class="showContactsTriangle")
+                    .col-sm-10
+                        span.glyphicon.glyphicon-option-horizontal.low(ng-show="!showContacts" ng-click="toggleContacts()")
+                        table.table.table-condensed.animate-show(ng-show="showContacts")
                             thead
                                 tr
                                     th Last Name
@@ -35,7 +37,7 @@
                                     td
                                         input.form-control(name="clientFirstName" ng-model="client.firstName" required)
                                     td
-                                        input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" required)
+                                        input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" clientdob="", required)
                                     td
                                         button.btn.btn-sm(ng-click="removeContact(client)" ng-show="client._id == 0") X
                             tfoot
@@ -46,79 +48,73 @@
                                         span.error(ng-show="familyForm.clientFirstName.$touched && familyForm.clientFirstName.$error.required") Please enter a First Name.
                                     td
                                         span.error(ng-show="familyForm.clientDateOfBirth.$touched && familyForm.clientDateOfBirth.$error.required") Please enter a Date Of Birth.
+                                        span.error(ng-show="familyForm.clientDateOfBirth.$error.clientdob") Date of Birth must be in the past.
                 .form-group
-                    label.col-md-2.control-label(for="dateAdded") Date Added
-                    .col-md-10
+                    label.col-sm-2.control-label(for="dateAdded") Date Added
+                    .col-sm-4
                         input.form-control(name="dateAdded", type="date", placeholder="Date Added", ng-model="family.dateAdded" readonly)
-                .form-group
-                    label.col-md-2.control-label(for="familyStatus") Family Status
-                    .col-md-10
+                    label.col-sm-2.control-label(for="familyStatus") Family Status
+                    .col-sm-4
                         select.form-control(name="familyStatus", ng-model="family.familyStatus")
                             option(ng-repeat='status in familyStatuses', ng-selected="Family") {{status}}
                 .form-group
-                    label.col-md-2.control-label(for="address1") Address 1
-                    .col-md-10
+                    label.col-sm-2.control-label(for="address1") Address 1
+                    .col-sm-4
                         input.form-control(name="address1", type="text", placeholder="Address Line 1", ng-model="family.address1", required)
                         span.error(ng-show="familyForm.address1.$touched && familyForm.address1.$error.required") Please enter Address Line 1.
-                .form-group
-                    label.col-md-2.control-label(for="address2") Address 2
-                    .col-md-10
+                    label.col-sm-2.control-label(for="address2") Address 2
+                    .col-sm-4
                         input.form-control(name="address2", type="text", placeholder="Address Line 2", ng-model="family.address2")
                 .form-group
-                    label.col-md-2.control-label(for="city") City
-                    .col-md-10
+                    label.col-sm-2.control-label(for="city") City
+                    .col-sm-4
                         input.form-control(name="city", type="text", placeholder="City", ng-model="family.city", required)
                         span.error(ng-show="familyForm.city.$touched && familyForm.city.$error.required") Please enter City.
-                .form-group
-                    label.col-md-2.control-label(for="province") Province
-                    .col-md-10
-                        //input.form-control(name="province", type="text", placeholder="Province", ng-model="family.province", required)
+                    label.col-sm-2.control-label(for="province") Province
+                    .col-sm-4
                         select.form-control(name="province", ng-model="family.province" ng-options="prov for prov in provinceCodes")
-                        //span.error(ng-show="familyForm.province.$touched && familyForm.province.$error.required") Please select a Province .
                 .form-group
-                    label.col-md-2.control-label(for="postal") Postal Code
-                    .col-md-10
+                    label.col-sm-2.control-label(for="postal") Postal Code
+                    .col-sm-4
                         input.form-control(name="postal", type="text", ng-model="family.postal", ui-mask="A9A 9A9" required)
                         span.error(ng-show="familyForm.postal.$touched && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
-                .form-group
-                    label.col-md-2.control-label(for="phone1") Phone Number
-                    .col-md-10
+                    label.col-sm-2.control-label(for="phone1") Phone Number
+                    .col-sm-4
                         input.form-control(name="phone1", type="text", ng-model="family.phone1", ui-mask="(999) 999-9999" required)
                         span.error(ng-show="familyForm.phone1.$touched && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999) 999-9999).
                 .form-group
-                    label.col-md-2.control-label(for="totalMonthlyExpenses") Total Monthly Expenses
-                    .col-md-10
+                    label.col-sm-2.control-label(for="totalMonthlyExpenses") Monthly Expenses
+                    .col-sm-4
                         input.form-control(name="totalMonthlyExpenses", type="text", placeholder="Total Monthly Expenses", ng-model="family.totalMonthlyExpenses", required pattern="\\d+(\\.\\d{2})?")
                         span.error(ng-show="familyForm.totalMonthlyExpenses.$touched && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.pattern)") Please enter valid Total Monthly Expenses.
-                .form-group
-                    label.col-md-2.control-label(for="totalMonthlyIncome") Total Monthly Income
-                    .col-md-10
+                    label.col-sm-2.control-label(for="totalMonthlyIncome") Monthly Income
+                    .col-sm-4
                         input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", required pattern="\\d+(\\.\\d{2})?")
                         span.error(ng-show="familyForm.totalMonthlyIncome.$touched && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.pattern)") Please enter valid Total Monthly Income.
-                .form-group
-                    .col-md-10.col-md-offset-2
+                .form-group-md
+                    .col-md-4.col-md-offset-1
                         label
                             input(type="checkbox", name="proofOfIncomeProvided", ng-model="family.proofOfIncomeProvided")
                             | Proof of Income Provided
-                .form-group
-                    .col-md-10.col-md-offset-2
+                    .col-md-4
                         label
                             input(type="checkbox", name="proofOfExpensesProvided", ng-model="family.proofOfExpensesProvided")
                             | Proof of Expenses Provided
-                .form-group
-                    .col-md-10.col-md-offset-2
+                    .col-md-3
                         label
                             input(type="checkbox", name="proofOfAddressProvided", ng-model="family.proofOfAddressProvided")
                             | Proof of Address Provided
                 .form-group
-                    label.col-md-2.control-label(for="registeredDate") Registered Date
-                    .col-md-10
+                .form-group
+                    label.col-sm-2.control-label(for="registeredDate") Registered Date
+                    .col-sm-4
                         input.form-control(name="registeredDate", type="date", placeholder="Registered Date", ng-model="family.registeredDate", readonly)
                         span.error(ng-show="familyForm.registeredDate.$dirty && familyForm.registeredDate.$error.required") Please enter Registered Date.
+                    .col-sm-6
                 .form-group
-                    .col-md-6.col-md-offset-2
+                    .col-sm-6.col-sm-offset-2
                         button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New
-                    .col-md-4
+                    .col-sm-4
                         .pull-right
                             button.btn.btn-primary(ng-click="save()", ng-disabled="!canSave()") Submit
                             | &nbsp;

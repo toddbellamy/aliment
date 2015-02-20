@@ -1,4 +1,4 @@
-function FamilyDetailController($scope, $routeParams, FamilyResource) {
+function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) {
 
     $scope.formName = 'familyForm';
     $scope.documentName = 'family';
@@ -22,11 +22,15 @@ function FamilyDetailController($scope, $routeParams, FamilyResource) {
         };
     };
 
-    BaseFormController.call(this, $scope, $routeParams);
+    BaseFormController.call(this, $scope, $routeParams, Notifier);
 
     $scope.addContact = function() {
         if(!$scope.family.clients) {
             $scope.family.clients = [];
+        }
+
+        if(!$scope.showContacts) {
+            $scope.toggleContacts();
         }
 
         if($scope.family.clients.length > 0) {
@@ -46,6 +50,14 @@ function FamilyDetailController($scope, $routeParams, FamilyResource) {
           $scope.family.clients.splice(index, 1);
       }
     };
+
+    $scope.showContacts = false;
+    $scope.showContactsTriangle = "glyphicon-triangle-right";
+    $scope.toggleContacts = function() {
+        $scope.showContacts = !$scope.showContacts;
+        $scope.showContactsTriangle = ($scope.showContacts ? "glyphicon-triangle-bottom" : "glyphicon-triangle-right");
+    };
+
 
 }
 FamilyDetailController.prototype = Object.create(BaseFormController.prototype);

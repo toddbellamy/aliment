@@ -26,11 +26,12 @@
                 .form-group
                     label.col-md-2.control-label(for="dateOfBirth") Date Of Birth
                     .col-md-10
-                        input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", required)
+                        input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", clientdob="", required)
                         span.error(ng-show="clientForm.dateOfBirth.$dirty && clientForm.dateOfBirth.$error.required") Please enter a Date Of Birth.
+                        span.error(ng-show="clientForm.dateOfBirth.$error.clientdob") Date of Birth must be in the past.
                 .form-group
                     .col-md-6.col-md-offset-2
-                        button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New
+                        //button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New
                     .col-md-4
                         .pull-right
                             button.btn.btn-primary(ng-click="save()", ng-disabled="!canSave()") Submit
