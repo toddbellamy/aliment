@@ -1,69 +1,43 @@
 body {
-    padding-top:60px;
-    padding-left: 20px;
-    padding-right: 20px;
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+  padding-top: 60px;
 }
-
-/*a {*/
-  /*color: #286090; *//*  #00b7ff;*/
-/*}*/
-
-footer.fixed-bottom {
-    bottom:0px;
-    height: 20px;
-    z-index: 1234;
-    position: fixed;
-    text-align: left;
-    padding-left:10px;
-    width:100%;
-    background-color: #f8f8f8;
+a {
+  color: #337ab7;
 }
-
-footer a {
-    font-size:.8em;
+input[type="checkbox"] {
+  font-size: 3em;
+  margin-right: 5px;
 }
-
 .lg-label {
   font-size: 20px;
   padding: 10px 15px;
 }
-
+footer.fixed-bottom {
+  bottom: 0px;
+  height: 20px;
+  z-index: 1234;
+  position: fixed;
+  text-align: left;
+  padding-left: 10px;
+  width: 100%;
+  background-color: #f8f8f8;
+}
+footer a {
+  font-size: 0.8em;
+}
 span.glyphicon.showhide-triangle {
-    padding-left: 3px;
-    top: 2px;
+  padding-left: 3px;
+  top: 2px;
 }
-
 span.glyphicon.glyphicon-option-horizontal.low {
-    top:10px;
+  top: 10px;
 }
-
-.glypicon-rotate-down {
-    -webkit-transition: all linear 0.5s;
-    transition: all linear 0.5s;
-    content: "\e252";
+table.table-hover {
+  cursor: pointer;
 }
-
-span.glyphicon.showhide-triangle.animate-up {
-    content: "\e250";
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
 }
-
-span.glyphicon.showhide-triangle.animate-down {
-    content: "\e250";
-}
-
-table.animate-show {
-    opacity: 1;
-}
-
-table.animate-show.ng-hide-add.ng-hide-add-active,
-table.animate-show.ng-hide-remove.ng-hide-remove-active {
-    -webkit-transition: all linear 0.5s;
-    transition: all linear 0.5s;
-}
-
-table.animate-show.ng-hide {
-    opacity: 0;
-}
-
-

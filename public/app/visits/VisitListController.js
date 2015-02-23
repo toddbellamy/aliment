@@ -1,11 +1,11 @@
 
 
-function VisitListController($scope, $routeParams, VisitResource) {
+function VisitListController($scope, $routeParams, VisitResource, Notifier) {
 
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
     $scope.documentResource = VisitResource;
-    BaseFormController.call(this, $scope, $routeParams);
+    BaseFormController.call(this, $scope, $routeParams, Notifier);
 
     $scope.sortOptions = [{value:"date",text: "Sort by Date"}, {value: "client",text: "Sort by Client"}];
     $scope.sortOrder = $scope.sortOptions[0].value;
@@ -40,15 +40,6 @@ function VisitListController($scope, $routeParams, VisitResource) {
             _id:'000000000000000000000000'
         });
 
-        //date: {type: Date, required: '{PATH} is required!'},
-        //value: {type: Number },
-        //storeVoucher: {type: String },
-        //reusableBagGiven: {type: Boolean },
-        //comments: {type: String },
-        //verification: {type: String, required: '{PATH} is required!'},
-        //foodVoucher: {type: String },
-        //approvedBy: {type: String },
-        //client : { type: mongoose.Schema.ObjectId, ref: 'Client' }
     };
 
     $scope.removeVisit = function(visit) {
@@ -63,10 +54,29 @@ function VisitListController($scope, $routeParams, VisitResource) {
     };
 
     $scope.saveVisits = function() {
-        //$scope.family.primaryClient = null;
-        //$scope.family.clients = [];
         $scope.save();
     }
+
+    $scope.pageSize = 5;
+    $scope.currentPage = 1;
+    $scope.visitPages = function () {
+        var pages = [];
+        if($scope.family && $scope.family.visits) {
+            for(var i=0; i < ($scope.family.visits.length / $scope.pageSize); i++) {
+                pages.push(i + 1);
+            };
+        }
+        return pages;
+    };
+    $scope.setPage = function (page) {
+        $scope.currentPage = page;
+    };
+    $scope.lastPage = function() {
+      $scope.currentPage = ($scope.family.visits.length / $scope.pageSize);
+    };
+    $scope.firstPage = function() {
+        $scope.currentPage = 1;
+    };
 
 }
 VisitListController.prototype = Object.create(BaseFormController.prototype);

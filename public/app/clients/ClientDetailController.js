@@ -1,9 +1,9 @@
-function ClientDetailController($scope, $routeParams, ClientResource) {
+function ClientDetailController($scope, $routeParams, ClientResource, Notifier) {
 
     $scope.formName = 'clientForm';
     $scope.documentName = 'client';
     $scope.documentResource = ClientResource;
-    BaseFormController.call(this, $scope, $routeParams);
+    BaseFormController.call(this, $scope, $routeParams, Notifier);
 
 }
 ClientDetailController.prototype = Object.create(BaseFormController.prototype);

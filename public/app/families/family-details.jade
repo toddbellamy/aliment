@@ -89,21 +89,24 @@
                         span.error(ng-show="familyForm.totalMonthlyExpenses.$touched && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.pattern)") Please enter valid Total Monthly Expenses.
                     label.col-sm-2.control-label(for="totalMonthlyIncome") Monthly Income
                     .col-sm-4
-                        input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", required pattern="\\d+(\\.\\d{2})?")
+                        input.form-control(name="totalMonthlyIncome", type="number", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", required pattern="\\d+(\\.\\d{2})?")
                         span.error(ng-show="familyForm.totalMonthlyIncome.$touched && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.pattern)") Please enter valid Total Monthly Income.
                 .form-group-md
                     .col-md-4.col-md-offset-1
-                        label
-                            input(type="checkbox", name="proofOfIncomeProvided", ng-model="family.proofOfIncomeProvided")
-                            | Proof of Income Provided
+                        .checkbox
+                            label
+                                input.input-sm(type="checkbox", name="proofOfIncomeProvided", ng-model="family.proofOfIncomeProvided")
+                                | Proof of Income Provided
                     .col-md-4
-                        label
-                            input(type="checkbox", name="proofOfExpensesProvided", ng-model="family.proofOfExpensesProvided")
-                            | Proof of Expenses Provided
+                        .checkbox
+                            label
+                                input.input-sm(type="checkbox", name="proofOfExpensesProvided", ng-model="family.proofOfExpensesProvided")
+                                | Proof of Expenses Provided
                     .col-md-3
-                        label
-                            input(type="checkbox", name="proofOfAddressProvided", ng-model="family.proofOfAddressProvided")
-                            | Proof of Address Provided
+                        .checkbox
+                            label
+                                input.input-sm(type="checkbox", name="proofOfAddressProvided", ng-model="family.proofOfAddressProvided")
+                                | Proof of Address Provided
                 .form-group
                 .form-group
                     label.col-sm-2.control-label(for="registeredDate") Registered Date

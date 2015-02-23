@@ -59,3 +59,11 @@ angular.module('app').filter('postal', function () {
         }
     };
 });
+
+angular.module('app').filter('pageSlice', function () {
+   return function(list, pageSize, currentPage) {
+       if(list) {
+           return list.slice(((currentPage-1)*pageSize), ((currentPage)*pageSize));
+       }
+   };
+});

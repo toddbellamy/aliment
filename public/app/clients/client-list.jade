@@ -8,7 +8,7 @@
                     a.btn.btn-md(href="/clients/new" ng-click="new()") New
             ul.nav.navbar-nav.pull-right
                 li
-                    input.form-control(ng-model="searchText", placeholder="Filter")
+                    input.form-control(ng-model="searchText", placeholder="Filter By Last Name")
                 li
                     select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
@@ -19,10 +19,11 @@
                 th Date of Birth
                 th Family Address
         tbody
-            tr(ng-repeat="client in clients | filter:searchText | orderBy:sortOrder")
+            tr.selectable-row(ng-repeat="client in clients" ng-click="clientRowClick(client._id)")
                 td
-                    a(href="/clients/{{client._id}}") {{client.lastName + ', ' + client.firstName}}
+                    span {{client.lastName + ', ' + client.firstName}}
                 td
-                    a(href="/clients/{{client._id}}") {{client.dateOfBirth | date}}
+                    span {{client.dateOfBirth | date}}
                 td
-                    a(href="/families/{{client.family._id}}") {{client.family.address1 + ', ' + client.family.city}}
+                    span {{client.family.address1 + ', ' + client.family.city}}
+    pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()")

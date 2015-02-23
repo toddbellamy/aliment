@@ -22,16 +22,18 @@
                 th Postal
                 th Date Added
         tbody
-            tr(ng-repeat="family in families | filter:searchText | orderBy:sortOrder")
+            tr.selectable-row(ng-repeat="family in families | filter:searchText | orderBy:sortOrder" ng-click="familyRowClick(family._id)")
                 td
-                    a(href="/families/{{family._id}}") {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName }}
+                    span {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName }}
                 td
-                    a(href="/families/{{family._id}}") {{family.phone1 | tel}}
+                    span {{family.phone1 | tel}}
                 td
-                    a(href="/families/{{family._id}}") {{family.address1 + ', ' + family.address2}}
+                    span {{family.address1 + ', ' + family.address2}}
                 td
-                    a(href="/families/{{family._id}}") {{family.city}}
+                    span {{family.city}}
                 td
-                    a(href="/families/{{family._id}}") {{family.postal | postal}}
+                    span {{family.postal | postal}}
                 td
-                    a(href="/families/{{family._id}}") {{family.dateAdded | date}}
+                    span {{family.dateAdded | date}}
+pagination.pagination-sm(total-items="pageTotalItems" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages")
+

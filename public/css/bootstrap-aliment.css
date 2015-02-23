@@ -1,6 +1,6 @@
 
-.form-group-md {
-    margin-bottom: 15px;
+.form-group, .form-group-md {
+    margin-bottom: 10px;
 }
 
 .jumbotron {
@@ -30,13 +30,21 @@ section.content .navbar-header > .navbar-brand {
     margin-top:10px;
 }
 
+.well-sm {
+    margin-bottom: 10px;
+}
+
 table.table {
     margin-bottom:10px;
 }
 
+.checkbox > label {
+    font-weight: bold;
+}
 
 input.input-sm[type='checkbox'] {
-    width: 100%;
+    width: 18px;
     height: 18px;
-    margin-top:6px;
+    margin-top:1px;
+    margin-left:-25px;
 }
