@@ -35,7 +35,7 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
         $location.path("/families/" + id);
     };
 
-    $scope.itemsPerPage = 4;
+    $scope.itemsPerPage = 12;
     $scope.pageTotalItems = 1;
     $scope.currentPage = 1;
     $scope.pageMaxSize = 10;

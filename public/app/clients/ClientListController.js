@@ -36,7 +36,7 @@ angular.module('app').controller('ClientListController', function($scope, $locat
         $location.path("/clients/" + id);
     };
 
-    $scope.itemsPerPage = 4;
+    $scope.itemsPerPage = 12;
     $scope.pageTotalItems = 1;
     $scope.currentPage = 1;
     $scope.pageMaxSize = 10;
