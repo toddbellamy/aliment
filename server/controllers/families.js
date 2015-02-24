@@ -25,6 +25,9 @@ exports.getFamilies = function(req, res) {
             res.send(collection);
         });
     }
+    else if (req.query.page && req.query.size) {
+        getFamiliesPaged(req, res);
+    }
     else {
         Family.find({}).populate('primaryClient')
             .exec(function (err, collection) {
@@ -33,6 +36,52 @@ exports.getFamilies = function(req, res) {
     }
 
     return {};
+};
+
+
+var getFamiliesPaged = function(req, res) {
+    var page = req.query.page, size = req.query.size;
+    var query, innerQuery;
+
+    if(req.query.filter) {
+
+        Client.find({ lastName: { $regex : req.query.filter }})
+            .select('_id')
+            .exec(function(err, clients) {
+
+                query = Family.find({}).where('primaryClient').in(clients);
+                innerQuery = Family.find({}).where('primaryClient').in(clients);
+                getFamilies();
+            });
+
+    }
+    else {
+        query = Family.find({});
+        innerQuery = Family.find({});
+        getFamilies();
+    }
+
+    function getFamilies() {
+
+        if (req.query.sort == 'dateAdded') {
+            innerQuery = innerQuery.sort({"dateAdded": 1});
+        }
+        else if (req.query.sort == 'address1') {
+            innerQuery = innerQuery.sort({"address1": 1});
+        }
+        else if (req.query.sort == 'phone1') {
+            innerQuery = innerQuery.sort({"phone1": 1});
+        }
+
+        query.count(function (err, count) {
+            innerQuery.skip((page - 1) * size).limit(size)
+                .populate('primaryClient')
+                .exec(function (err, collection) {
+                    res.set({TotalRowCount: count});
+                    res.send(collection);
+                });
+        });
+    };
 };
 
 exports.saveFamily = function(req, res) {

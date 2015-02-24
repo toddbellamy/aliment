@@ -9,7 +9,7 @@
                         a.btn.btn-md(href="/families/{{family._id}}") Family
                 ul.nav.navbar-nav.pull-right
                     li
-                        input.form-control(ng-model="searchText", placeholder="Filter")
+                        input.form-control(ng-model="searchText", ng-model-options="{ debounce: 250 }" placeholder="Filter by Name")
                     li
                         select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 

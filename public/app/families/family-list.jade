@@ -8,7 +8,7 @@
                     a.btn.btn-md(href="/families/new" ng-click="new()") New
             ul.nav.navbar-nav.pull-right
                 li
-                    input.form-control(ng-model="searchText", placeholder="Filter")
+                    input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }", placeholder="Filter by Last Name")
                 li
                     select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
@@ -35,5 +35,6 @@
                     span {{family.postal | postal}}
                 td
                     span {{family.dateAdded | date}}
-pagination.pagination-sm(total-items="pageTotalItems" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages")
+    pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="loadFamiliess()")
+
 

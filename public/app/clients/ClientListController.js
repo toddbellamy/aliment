@@ -2,7 +2,7 @@ angular.module('app').controller('ClientListController', function($scope, $locat
 
     $scope.clients = [];
 
-    var loadClients = function() {
+    $scope.loadClients = function() {
 
         $scope.clients = ClientResource.query({
                 page:$scope.currentPage,
@@ -20,14 +20,13 @@ angular.module('app').controller('ClientListController', function($scope, $locat
 
     $scope.$watch('searchText', function() {
         $scope.currentPage = 1;
-        loadClients();
+        $scope.loadClients();
     });
 
     $scope.$watch('sortOrder', function() {
         $scope.currentPage = 1;
-        loadClients();
+        $scope.loadClients();
     });
-
 
     $scope.sortOptions = [{value:"name",text: "Sort by Name"}, {value:"dateOfBirth",text: "Sort by Date of Birth"}];
 
@@ -37,7 +36,7 @@ angular.module('app').controller('ClientListController', function($scope, $locat
         $location.path("/clients/" + id);
     };
 
-    $scope.itemsPerPage = 12;
+    $scope.itemsPerPage = 4;
     $scope.pageTotalItems = 1;
     $scope.currentPage = 1;
     $scope.pageMaxSize = 10;
@@ -47,11 +46,6 @@ angular.module('app').controller('ClientListController', function($scope, $locat
 
     };
 
-    $scope.pageChanged = function() {
-        console.log('Page changed to: ' + $scope.currentPage);
-        loadClients();
-    };
-
-    loadClients();
+    $scope.loadClients();
 
 });

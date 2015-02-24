@@ -3,12 +3,9 @@
         .navbar-header
             .navbar-brand Clients
         .navbar-collapse.collapse
-            ul.nav.navbar-nav.pull-left
-                li
-                    a.btn.btn-md(href="/clients/new" ng-click="new()") New
             ul.nav.navbar-nav.pull-right
                 li
-                    input.form-control(ng-model="searchText", placeholder="Filter By Last Name")
+                    input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
                 li
                     select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
@@ -26,4 +23,4 @@
                     span {{client.dateOfBirth | date}}
                 td
                     span {{client.family.address1 + ', ' + client.family.city}}
-    pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="pageChanged()")
+    pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="loadClients()")
