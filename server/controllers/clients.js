@@ -64,13 +64,6 @@ exports.getClients = function(req, res) {
     return {};
 };
 
-exports.getClientsCount = function(req, res) {
-    var query = Client.find({});
-    query.count(function(err, count) {
-        res.send({count:conunt});
-    });
-};
-
 exports.saveClient = function(req, res) {
     var clientData = req.body;
     var updateData = {

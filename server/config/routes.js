@@ -3,7 +3,6 @@
 var clients = require('../controllers/clients'),
     families = require('../controllers/families');
     visits = require('../controllers/visits');
-//    mongoose = require('mongoose'),
 //    User = mongoose.model('User');
 
 module.exports = function(app) {

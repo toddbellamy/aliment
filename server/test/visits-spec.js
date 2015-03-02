@@ -10,7 +10,7 @@ describe('server', function() {
         boot();
     });
 
-    describe('visitsget', function () {
+    describe('getVisits', function () {
         it('should get return ok response with a family object that contains visits', function (done) {
             superagent
                 .get(basepath + '/api/visits/0')
@@ -24,7 +24,7 @@ describe('server', function() {
         });
     });
 
-    describe('visitupdate', function() {
+    describe('updateVisit', function() {
         var family = null;
         before(function(done) {
             superagent
@@ -46,11 +46,11 @@ describe('server', function() {
                     expect(res.status).to.equal(200);
 
                     superagent
-                        .get(basepath + '/api/visits/0')
+                        .get(basepath + '/api/visits/' + family._id)
                         .end(function (res) {
                             expect(typeof res.body).to.eql('object');
-                            family = res.body;
-                            expect(family.visits[0].value === updatedVisitValue)
+                            var updatedFamily = res.body;
+                            expect(updatedFamily.visits[0].value === updatedVisitValue)
                             done();
                         });
 
@@ -58,7 +58,7 @@ describe('server', function() {
             })
     });
 
-    describe('visitcreate', function() {
+    describe('createVisit', function() {
         var family = null;
         before(function(done) {
             superagent
@@ -93,11 +93,11 @@ describe('server', function() {
                     expect(res.status).to.equal(200);
 
                     superagent
-                        .get(basepath + '/api/visits/0')
+                        .get(basepath + '/api/visits/' + family._id)
                         .end(function (res) {
                             expect(typeof res.body).to.eql('object');
-                            family = res.body;
-                            expect(family.visits.length === (visitCount + 1));
+                            var updatedFamily = res.body;
+                            expect(updatedFamily.visits.length === (visitCount + 1));
                             done();
                         });
 
@@ -105,10 +105,8 @@ describe('server', function() {
         })
     });
 
-
-
     after(function () {
         shutdown();
     });
 
-})
+});
