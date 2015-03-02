@@ -2,12 +2,29 @@ var express = require('express');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
 var config = require('./server/config/config')[env];
+var appserver;
 
 require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
 //require('./server/config/passport')(app);
 require('./server/config/routes')(app);
 
-app.listen(config.port);
-console.log('Listening on port ' + config.port + '...');
 
+var boot = function() {
+    appserver = app.listen(config.port);
+    console.log('Listening on port ' + config.port + '...');
+}
+
+var shutdown = function() {
+    appserver.close();
+};
+
+if(require.main === module) {
+    boot();
+}
+else {
+    console.log('Running app as a module');
+    exports.boot = boot;
+    exports.shutdown = shutdown;
+    exports.port = config.port;
+}

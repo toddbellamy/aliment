@@ -30,6 +30,7 @@ section.content .navbar-header > .navbar-brand {
     margin-top:10px;
 }
 
+
 .well-sm {
     margin-bottom: 10px;
 }
@@ -47,4 +48,13 @@ input.input-sm[type='checkbox'] {
     height: 18px;
     margin-top:1px;
     margin-left:-25px;
+}
+
+td input.input-sm[type='checkbox'] {
+    margin-left:0px;
+    margin-top:7px;
+}
+
+td button.btn-xs {
+    margin-top:6px;
 }

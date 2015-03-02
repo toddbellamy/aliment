@@ -9,10 +9,13 @@ function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) 
         return {
             familyStatus: 'Family',
             dateAdded: new Date(),
+            address1:'',
             address2:'',
             city: 'Bowmanville',
             province: 'ON',
+            phone1:'',
             phone2:'',
+            postal:'',
             totalMonthlyExpenses:0,
             totalMonthlyIncome:0,
             proofOfIncomeProvided: false,
@@ -22,9 +25,9 @@ function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) 
         };
     };
 
-    BaseFormController.call(this, $scope, $routeParams, Notifier);
-
     $scope.addContact = function() {
+        checkRegistrationStatus($scope.family, Notifier);
+
         if(!$scope.family.clients) {
             $scope.family.clients = [];
         }
@@ -58,7 +61,14 @@ function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) 
         $scope.showContactsTriangle = ($scope.showContacts ? "glyphicon-triangle-bottom" : "glyphicon-triangle-right");
     };
 
+    $scope.registerFamily = function() {
+        if($scope.family) {
+            $scope.family.registeredDate = new Date();
+            $scope.setDirty();
+        }
+    };
 
+    BaseFormController.call(this, $scope, $routeParams, Notifier);
 }
 FamilyDetailController.prototype = Object.create(BaseFormController.prototype);
 

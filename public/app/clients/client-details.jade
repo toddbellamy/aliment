@@ -2,7 +2,7 @@
     .navbar
         .navbar-header
             .navbar-brand Client
-        .navbar-collapse.collapse
+        .navbar-collapse
             ul.nav.navbar-nav.pull-left
                 li
                     a.btn.btn-md(href="/families/{{client.family}}") Family
@@ -24,9 +24,9 @@
                 .form-group
                     label.col-md-2.control-label(for="dateOfBirth") Date Of Birth
                     .col-md-4
-                        input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", clientdob="", required)
+                        input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", date-of-birth="", required)
                         span.error(ng-show="clientForm.dateOfBirth.$dirty && clientForm.dateOfBirth.$error.required") Please enter a Date Of Birth.
-                        span.error(ng-show="clientForm.dateOfBirth.$error.clientdob") Date of Birth must be in the past.
+                        span.error(ng-show="clientForm.dateOfBirth.$error.dob") Date of Birth must be within past 120 years.
                 .form-group
                     .col-md-6.col-md-offset-2
                         //button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New

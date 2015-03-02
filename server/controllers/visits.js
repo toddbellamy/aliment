@@ -4,7 +4,7 @@ var Visit = require('mongoose').model('Visit');
 
 var loadAndSendFamily = function(res, query) {
 
-    Family.findOne(query)
+    return Family.findOne(query)
         .populate('primaryClient')
         .populate('clients')
         .populate('visits')
@@ -56,7 +56,7 @@ exports.saveVisits = function(req, res) {
                 return handleError(err);
             }
 
-            loadAndSendFamily(res, {_id:data._id});
+            loadAndSendFamily(res, { _id:data._id });
         });
     };
 
@@ -102,16 +102,3 @@ exports.saveVisits = function(req, res) {
         }
     });
 };
-
-
-//var visitSchemazzz = mongoose.Schema({
-//    date: {type: Date, required: '{PATH} is required!'},
-//    value: {type: Number },
-//    storeVoucher: {type: String },
-//    reusableBagGiven: {type: Boolean },
-//    comments: {type: String },
-//    verification: {type: String, required: '{PATH} is required!'},
-//    foodVoucher: {type: String },
-//    approvedBy: {type: String },
-//    client : { type: mongoose.Schema.ObjectId, ref: 'Client' }
-//});

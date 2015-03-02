@@ -116,6 +116,7 @@ exports.saveFamily = function(req, res) {
 
     var saveFamily = function() {
         if (data._id) {
+
             Family.update({_id: data._id}, family, function (err) {
                 if (err) {
                     return handleError(err);
@@ -136,6 +137,14 @@ exports.saveFamily = function(req, res) {
                     return handleError(err);
                 }
                 savedFamily.populate('clients primaryClient', function(err, doc) {
+
+                    savedFamily.clients.forEach(function(client) {
+                        client.family = savedFamily._id;
+                        client.save(function(err) {
+                            var e = err;
+                        });
+                    });
+
                     return res.send(savedFamily);
                 });
 

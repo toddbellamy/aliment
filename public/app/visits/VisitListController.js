@@ -11,6 +11,9 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier) {
     $scope.sortOrder = $scope.sortOptions[0].value;
 
     $scope.addVisit = function() {
+
+        checkRegistrationStatus($scope.family, Notifier);
+
         if($scope.sortOrder != 'date') {
             $scope.sortOrder = 'date';
         }
@@ -54,8 +57,10 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier) {
     };
 
     $scope.saveVisits = function() {
+        checkRegistrationStatus($scope.family, Notifier);
         $scope.save();
     }
+
 
     $scope.pageSize = 5;
     $scope.currentPage = 1;
@@ -80,5 +85,4 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier) {
 
 }
 VisitListController.prototype = Object.create(BaseFormController.prototype);
-
 angular.module('app').controller('VisitListController', VisitListController);

@@ -1,8 +1,8 @@
-.container.top-padding-med
+.container
     .navbar
         .navbar-header
             .navbar-brand Families
-        .navbar-collapse.collapse
+        .navbar-collapse
             ul.nav.navbar-nav.pull-left
                 li
                     a.btn.btn-md(href="/families/new" ng-click="new()") New
@@ -28,7 +28,7 @@
                 td
                     span {{family.phone1 | tel}}
                 td
-                    span {{family.address1 + ', ' + family.address2}}
+                    span {{family.address1 + '  ' + family.address2}}
                 td
                     span {{family.city}}
                 td

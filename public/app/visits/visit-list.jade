@@ -1,9 +1,9 @@
 .container
-    .navbar
+    .navbar-collapse
         .container
             .navbar-header
                 .navbar-brand Visits
-            .navbar-collapse.collapse
+            .navbar-collapse
                 ul.nav.navbar-nav.pull-left
                     li
                         a.btn.btn-md(href="/families/{{family._id}}") Family
@@ -56,11 +56,11 @@
                             td.col-sm-2
                                input.form-control(ng-value="visit.date | date" readonly)
                             td
-                                input.form-control(name="visitValue{{visit._id}}" ng-model="visit.value" ng-disabled="visit._id != 0" pattern="\\d+(\\.\\d{2})?")
-                                span.error(ng-show="familyVisitsForm.visitValue{{visit._id}}.$touched && familyVisitsForm.visitValue{{visit._id}}.$error.pattern") Please enter valid monetary value.
+                                input.form-control(name="visitValue{{visit._id}}" ng-model="visit.value" ng-disabled="visit._id != 0" smart-float)
+                                span.error(ng-show="familyVisitsForm.visitValue{{visit._id}}.$touched && familyVisitsForm.visitValue{{visit._id}}.$error.float") Please enter valid monetary value.
                             td
                                 input.form-control(name="visitStoreVoucher" ng-model="visit.storeVoucher" ng-disabled="visit._id != 0" )
-                            td(style="vertical-align: middle;text-align: center;")
+                            td(style="text-align: center;")
                                 input.input-sm(name="visitReusableBagGiven" type="checkbox" ng-model="visit.reusableBagGiven" )
                             td
                                 input.form-control(name="visitComments" ng-model="visit.comments" )
@@ -72,7 +72,8 @@
                             td
                                 input.form-control(name="visitApprovedBy" ng-model="visit.approvedBy" ng-disabled="visit._id != 0")
                             td
-                                button.btn.btn-sm(ng-click="removeVisit(visit)" ng-show="visit._id == 0") X
+                                button.btn.btn-xs(ng-click="removeVisit(visit)" ng-show="visit._id == 0")
+                                    span.glyphicon.glyphicon-remove
                 nav.nav-sm
                     ul.pagination.pagination-sm
                         li
