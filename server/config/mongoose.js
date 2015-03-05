@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    userModel = require('../models/User'),
     clientModel = require('../models/Client'),
     visitModel = require('../models/Visit'),
     familyModel = require('../models/Family');
@@ -12,6 +13,7 @@ module.exports = function(config) {
         console.log('aliment db opened');
     });
 
+    userModel.createDefaultUsers();
     familyModel.buildMockData();
 
 };

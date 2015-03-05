@@ -1,12 +1,12 @@
-angular.module('app', ['ngResource', 'ngRoute', 'ngAnimate', 'ui.utils', 'ui.bootstrap', 'ui.bootstrap.tpls']);
+angular.module('app', ['ngResource', 'ngRoute', 'ngAnimate', 'ui.utils', 'ui.bootstrap', 'ui.bootstrap.tpls', 'data.util']);
 
-angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider) {
+angular.module('app').config(function($routeProvider, $locationProvider, $httpProvider, dataUtilProvider) {
     var routeRoleChecks = {
-        admin: { auth: function(mvAuth) {
-          return mvAuth.authorizeCurrentUserForRoute('admin');
+        admin: { auth: function(Auth) {
+          return Auth.authorizeCurrentUserForRoute('admin');
         }},
-        user: { auth: function(mvAuth) {
-          return mvAuth.authorizeAuthenticatedUserForRoute();
+        user: { auth: function(Auth) {
+          return Auth.authorizeAuthenticatedUserForRoute();
         }}
     };
 
@@ -16,55 +16,40 @@ angular.module('app').config(function($routeProvider, $locationProvider, $httpPr
             controller: 'MainController'
         })
         .when('/admin/users', { templateUrl: '/partials/admin/user-list',
-            controller: 'mvUserListController', resolve: routeRoleChecks.admin
+            controller: 'UserListController', resolve: routeRoleChecks.admin
+        })
+        .when('/admin/users/:id', { templateUrl: '/partials/admin/user-detail',
+            controller: 'UserDetailController', resolve: routeRoleChecks.admin
         })
         .when('/clients', { templateUrl: '/partials/clients/client-list',
-            controller: 'ClientListController'
+            controller: 'ClientListController', resolve: routeRoleChecks.user
         })
         .when('/clients/:id', { templateUrl: '/partials/clients/client-details',
-            controller: 'ClientDetailController'
+            controller: 'ClientDetailController', resolve: routeRoleChecks.user
         })
         .when('/families', { templateUrl: '/partials/families/family-list',
-            controller: 'FamilyListController'
+            controller: 'FamilyListController', resolve: routeRoleChecks.user
         })
         .when('/families/:id', { templateUrl: '/partials/families/family-details',
-            controller: 'FamilyDetailController'
+            controller: 'FamilyDetailController', resolve: routeRoleChecks.user
         })
         .when('/visits/:id', { templateUrl: '/partials/visits/visit-list',
-            controller: 'VisitListController'
+            controller: 'VisitListController', resolve: routeRoleChecks.user
+        })
+        .when('/profile/profile', { templateUrl: '/partials/profile/profile',
+            controller: 'ProfileController', resolve: routeRoleChecks.user
         });
 
     $httpProvider.defaults.transformResponse.push(function(responseData) {
         if (typeof responseData === "object") {
-            convertDateStringsToDates(responseData);
+            dataUtilProvider.convertDateStringsToDates(responseData);
         }
 
         return responseData;
+
     });
 
-    var regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
 
-    var convertDateStringsToDates = function (input) {
-        // Ignore things that aren't objects.
-        if (typeof input !== "object") return input;
-
-        for (var key in input) {
-            if (!input.hasOwnProperty(key)) continue;
-
-            var value = input[key];
-            var match;
-            // Check for string properties which look like dates.
-            if (typeof value === "string" && (match = value.match(regexIso8601))) {
-                var milliseconds = Date.parse(match[0])
-                if (!isNaN(milliseconds)) {
-                    input[key] = new Date(milliseconds);
-                }
-            } else if (typeof value === "object") {
-                // Recurse into object
-                convertDateStringsToDates(value);
-            }
-        }
-    };
 });
 
 angular.module('app').run(function($rootScope, $location) {

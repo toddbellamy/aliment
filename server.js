@@ -6,9 +6,8 @@ var appserver;
 
 require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
-//require('./server/config/passport')(app);
+require('./server/config/passport')();
 require('./server/config/routes')(app);
-
 
 var boot = function() {
     appserver = app.listen(config.port);

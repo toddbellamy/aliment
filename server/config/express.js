@@ -2,9 +2,9 @@ var express = require('express'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
     stylus = require('stylus'),
-    cookieParser = require('cookie-parser');
-    //session = require('express-session'),
-    //passport = require('passport')
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    passport = require('passport');
 
 module.exports = function(app, config) {
 
@@ -17,9 +17,9 @@ module.exports = function(app, config) {
     app.use(logger('dev'));
     app.use(cookieParser());
     app.use(bodyParser.json());
-    //app.use(session({secret: 'lollipops rainbows unicorns'}));
-    //app.use(passport.initialize());
-    //app.use(passport.session());
+    app.use(session({secret: 'lollipops rainbows unicorns', saveUninitialized: true, resave: true}));
+    app.use(passport.initialize());
+    app.use(passport.session());
     app.use(stylus.middleware(
         {
             src: config.rootPath + '/public',
@@ -28,5 +28,4 @@ module.exports = function(app, config) {
     ));
 
     app.use(express.static(config.rootPath + '/public'));
-
-}
+};

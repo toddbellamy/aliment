@@ -25,6 +25,16 @@ footer.fixed-bottom {
 footer a {
   font-size: 0.8em;
 }
+.navbar-form .form-group {
+  margin-left: 10px;
+}
+.navbar-form button {
+  margin-left: 10px;
+}
+.navbar-form > .navbar-nav > li > a {
+  padding-top: 5px;
+  padding-right: 2px;
+}
 span.glyphicon.showhide-triangle {
   padding-left: 5px;
   top: 3px;
@@ -52,4 +62,7 @@ table.animate-show.ng-hide {
 .carousel,
 .panel-title a {
   cursor: pointer;
+}
+.toast-top-right {
+  top: 45px;
 }
