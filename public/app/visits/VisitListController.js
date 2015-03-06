@@ -1,6 +1,6 @@
 
 
-function VisitListController($scope, $routeParams, VisitResource, Notifier) {
+function VisitListController($scope, $routeParams, VisitResource, Notifier, Identity) {
 
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
@@ -37,7 +37,7 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier) {
             storeVoucher:'',
             reusableBagGiven:false,
             comments:'',
-            verification:'',
+            verification: Identity.currentUser.firstName,
             foodVoucher:'',
             approvedBy:'',
             _id:'000000000000000000000000'

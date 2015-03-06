@@ -12,7 +12,7 @@ section.content .navbar-header > .navbar-brand {
 }
 
 .nav > li > a.btn {
-    color:grey;
+    /*color:grey;*/
     font-weight: bold;
     padding:5px 10px 5px 10px;
     margin:10px 5px 10px 5px;
@@ -22,9 +22,9 @@ section.content .navbar-header > .navbar-brand {
     padding-right:5px;
 }
 
-.nav > li > a.btn:hover {
-    color: #286090;
-}
+/*.nav > li > a.btn:hover {*/
+    /*color: #286090;*/
+/*}*/
 
 .nav > li > input, .nav > li > select {
     margin-top:10px;
@@ -57,4 +57,12 @@ td input.input-sm[type='checkbox'] {
 
 td button.btn-xs {
     margin-top:6px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: #b95d40;
+}
+
+.pagination > li > a:hover, .pagination > li > span:hover {
+    color: #333333;
 }
