@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="server" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="/usr/local/bin/node" path-to-js-file="server.js" working-dir="$PROJECT_DIR$">
     <envs>
-      <env name="DEBUG" value="alimen" />
+      <env name="DEBUG" value="aliment" />
     </envs>
     <browser url="http://localhost:3000/" />
     <RunnerSettings RunnerId="Basic" />
