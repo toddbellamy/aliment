@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var familySchema = mongoose.Schema({
     familyStatus: {type:String, required:'{PATH} is required!' },
+    lastName: {type:String},
     dateAdded: {type: Date, required: '{PATH} is required!' },
     address1: {type: String, required: '{PATH} is required' },
     address2: {type: String, default:'' },
@@ -50,6 +51,7 @@ function buildMockData() {
                             }
                             var primaryClient = arguments[1];
                             family.primaryClient = primaryClient;
+                            family.lastName = primaryClient.lastName;
 
                             family.save(function (err, family) {
                                 fd.visitData.forEach(function(v) {

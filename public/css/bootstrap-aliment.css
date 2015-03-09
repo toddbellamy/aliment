@@ -11,6 +11,14 @@ section.content .navbar-header > .navbar-brand {
     padding-left: 0px;
 }
 
+/*.navbar, .navbar-collapse {*/
+    /*z-index: 900;*/
+/*}*/
+
+/*.navbar-nav > li > .dropdown-menu {*/
+    /*z-index: 1000;*/
+/*}*/
+
 .nav > li > a.btn {
     /*color:grey;*/
     font-weight: bold;

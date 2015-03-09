@@ -2,7 +2,7 @@
   form.navbar-form(ng-hide="identity.isAuthenticated()")
     ul.nav.navbar-nav
     .form-group
-      input.form-control(placeholder="User name", ng-model="username")
+      input.form-control(id="userName" placeholder="User name", ng-model="username")
     .form-group
       input.form-control(type="password", placeholder="Password", ng-model="password")
     button.btn.btn-primary(ng-click="signin(username, password)") Sign In
@@ -11,7 +11,7 @@
       a.dropdown-toggle(href="", data-toggle="dropdown")
         | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
         b.caret
-      ul.dropdown-menu
+      ul.dropdown-menu(style="z-index:990")
         li(ng-show="identity.currentUser.isAdmin()")
           a(href="/admin/users") User Admin
         li

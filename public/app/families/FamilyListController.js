@@ -15,9 +15,11 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
             });
     };
 
-    $scope.sortOptions = [{value:"dateAdded",text: "Sort by Date Added"},
-        {value: "phone1",text: "Sort by Phone Number"},
-        {value: "address1",text: "Sort by Address"}];
+    $scope.sortOptions = [
+        {value:"lastName",text: "Sort by Last Name"},
+        {value:"dateAdded",text: "Sort by Date Added"},
+        {value:"phone1",text: "Sort by Phone Number"},
+        {value:"address1",text: "Sort by Address"}];
 
     $scope.sortOrder = $scope.sortOptions[0].value;
 

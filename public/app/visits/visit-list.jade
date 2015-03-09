@@ -65,7 +65,7 @@
                             td
                                 input.form-control(name="visitComments" ng-model="visit.comments" )
                             td
-                                input.form-control(name="visitVerification{{visit._id}}" ng-model="visit.verification" required)
+                                input.form-control(name="visitVerification{{visit._id}}" ng-model="visit.verification" invalid-leave required)
                                 span.error(ng-show="familyVisitsForm.visitVerification{{visit._id}}.$touched && familyVisitsForm.visitVerification{{visit._id}}.$error.required") Please provide Verification.
                             td
                                 input.form-control(name="visitFoodVoucher" ng-model="visit.foodVoucher" ng-disabled="visit._id != 0")

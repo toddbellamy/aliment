@@ -1,14 +1,17 @@
 body {
   padding-top: 0px;
 }
+
 input[type="checkbox"] {
   font-size: 3em;
   margin-right: 5px;
 }
+
 .lg-label {
   font-size: 20px;
   padding: 10px 15px;
 }
+
 footer.fixed-bottom {
   bottom: 0px;
   height: 20px;
@@ -18,47 +21,77 @@ footer.fixed-bottom {
   padding-left: 10px;
   width: 100%;
 }
+
 footer a {
   font-size: 0.8em;
 }
+
 .navbar-form .form-group {
   margin-left: 10px;
 }
+
 .navbar-form button {
   margin-left: 10px;
 }
+
 .navbar-form > .navbar-nav > li > a {
   padding-top: 5px;
   padding-right: 2px;
 }
+
 span.glyphicon.showhide-triangle {
   padding-left: 5px;
   top: 3px;
 }
+
 span.glyphicon.glyphicon-option-horizontal.low {
   top: 10px;
   padding-left: 5px;
 }
+
 table.table-hover {
   cursor: pointer;
 }
+
 table.animate-show {
   opacity: 1;
 }
+
 table.animate-show.ng-hide-add.ng-hide-add-active,
 table.animate-show.ng-hide-remove.ng-hide-remove-active {
   -webkit-transition: all linear 0.5s;
   transition: all linear 0.5s;
 }
+
 table.animate-show.ng-hide {
   opacity: 0;
 }
+
 .nav,
 .pagination,
 .carousel,
 .panel-title a {
   cursor: pointer;
 }
+
 .toast-top-right {
   top: 45px;
+}
+
+input.form-control.ng-invalid.ng-touched {
+    background-color: #F5B9BC;
+    border: solid rgb(189, 39, 39) 1px;
+}
+
+span.error {
+    position: fixed;
+    background: rgb(184, 5, 5);
+    background: rgb(184, 5, 5);
+    border-radius: 3px;
+    margin-top: 2px;
+    padding: 3px;
+    font-size: 0.8em;
+    color: white;
+    opacity: 0.7;
+    z-index:100;
 }

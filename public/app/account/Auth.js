@@ -82,8 +82,9 @@ angular.module('app').factory('Auth', function($http, Identity, $q, User, Notifi
         return true;
       }
       else {
-          Notifier.error("Not authorized");
-          return $q.reject('not authorized');
+          Notifier.alert("Please login");
+          $('#userName').focus();
+          return $q.reject('not authenticated');
       }
     }
   }

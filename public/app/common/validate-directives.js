@@ -25,10 +25,8 @@ angular.module('app').directive('dateOfBirth', function() {
             }
         }
     };
-});
-
-
-angular.module('app').directive('smartFloat', function ($filter) {
+})
+.directive('smartFloat', function ($filter) {
     var FLOAT_REGEXP_1 = /^\$?\d+(.\d{3})*(\,\d*)?$/; //Numbers like: 1.123,56
     var FLOAT_REGEXP_2 = /^\$?\d+(,\d{3})*(\.\d*)?$/; //Numbers like: 1,123.56
     return {
@@ -53,4 +51,15 @@ angular.module('app').directive('smartFloat', function ($filter) {
             );
         }
     };
-});
+})
+.directive('invalidLeave', ['$animate', function($animate) {
+    return function(scope, element, attrs) {
+        element.on('blur', function() {
+            if(element.hasClass('ng-invalid')) {
+                var $errspan = $(element).next('span.error')
+                $errspan.fadeIn(300).delay(2000).fadeOut(2000);
+
+            }
+        });
+    };
+}]);

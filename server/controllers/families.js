@@ -63,7 +63,10 @@ var getFamiliesPaged = function(req, res) {
 
     function getFamilies() {
 
-        if (req.query.sort == 'dateAdded') {
+        if (req.query.sort == 'lastName') {
+            innerQuery = innerQuery.sort({"lastName": 1});
+        }
+        else if (req.query.sort == 'dateAdded') {
             innerQuery = innerQuery.sort({"dateAdded": 1});
         }
         else if (req.query.sort == 'address1') {
@@ -90,6 +93,7 @@ exports.saveFamily = function(req, res) {
 
     var family = {
         familyStatus:data.familyStatus,
+        lastName:data.primaryClient.lastName,
         dateAdded:data.dateAdded,
         address1:data.address1,
         address2:data.address2,

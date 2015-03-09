@@ -1,5 +1,5 @@
 .container
-    .navbar
+    .navbar(style="z-index: 900")
         .navbar-header
             .navbar-brand Family
         .navbar-collapse
@@ -39,7 +39,7 @@
                                         input.form-control(name="clientFirstName" ng-model="client.firstName" required)
                                     td
                                         input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" date-of-birth="", required)
-                                    td
+                                    td(style="border:none")
                                         button.btn.btn-xs(ng-click="removeContact(client)" ng-show="client._id == 0")
                                             span.glyphicon.glyphicon-remove
                             tfoot
