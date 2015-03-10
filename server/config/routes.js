@@ -8,24 +8,24 @@ var mongoose = require('mongoose'),
 
 module.exports = function(app, req, res) {
 
-    app.get('/api/users/:id', auth.requiresRole('admin'), users.getUser);
-    app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
-    app.post('/api/users', users.createUser);
-    app.put('/api/users', users.updateUser);
+    app.get('/api/users/:id', auth.requiresRole(['admin']), users.getUser);
+    app.get('/api/users', auth.requiresRole(['admin']), users.getUsers);
+    app.post('/api/users', auth.requiresRole(['admin']), users.createUser);
+    app.put('/api/users', auth.requiresRole(['admin']), users.updateUser);
 
     app.get('/api/clients/:id', clients.getClient);
     app.get('/api/clients/', clients.getClients);
-    app.post('/api/clients/:id', clients.saveClient);
-    app.post('/api/clients/', clients.saveClient);
+    app.post('/api/clients/:id', auth.requiresRole(['admin', 'staff']), clients.saveClient);
+    app.post('/api/clients/', auth.requiresRole(['admin', 'staff']), clients.saveClient);
 
 
     app.get('/api/families/:id', auth.requiresApiLogin(), families.getFamily);
     app.get('/api/families/', auth.requiresApiLogin(), families.getFamilies);
-    app.post('/api/families/:id', families.saveFamily);
-    app.post('/api/families/', families.saveFamily);
+    app.post('/api/families/:id', auth.requiresRole(['admin', 'staff']), families.saveFamily);
+    app.post('/api/families/', auth.requiresRole(['admin', 'staff']), families.saveFamily);
 
     app.get('/api/visits/:id', visits.getFamilyWithVisits);
-    app.post('/api/visits/:id', visits.saveVisits);
+    app.post('/api/visits/:id', auth.requiresRole(['admin', 'staff']), visits.saveVisits);
 
 
     app.get('/partials/*', auth.requiresApiLogin(), function (req, res) {

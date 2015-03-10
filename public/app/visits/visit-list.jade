@@ -1,9 +1,14 @@
 .container
-    .navbar-collapse
-        .container
+    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
+        .container-fluid
             .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
                 .navbar-brand Visits
-            .navbar-collapse
+            .collapse.navbar-collapse(id="secondary-navbar")
                 ul.nav.navbar-nav.pull-left
                     li
                         a.btn.btn-md(href="/families/{{family._id}}") Family
@@ -56,7 +61,7 @@
                             td.col-sm-2
                                input.form-control(ng-value="visit.date | date" readonly)
                             td
-                                input.form-control(name="visitValue{{visit._id}}" ng-model="visit.value" ng-disabled="visit._id != 0" smart-float)
+                                input.form-control(name="visitValue{{visit._id}}" ng-model="visit.value" ng-disabled="visit._id != 0" smart-float invalid-leave)
                                 span.error(ng-show="familyVisitsForm.visitValue{{visit._id}}.$touched && familyVisitsForm.visitValue{{visit._id}}.$error.float") Please enter valid monetary value.
                             td
                                 input.form-control(name="visitStoreVoucher" ng-model="visit.storeVoucher" ng-disabled="visit._id != 0" )

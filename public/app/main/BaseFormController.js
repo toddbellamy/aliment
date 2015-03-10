@@ -1,4 +1,4 @@
-function BaseFormController($scope, $routeParams, Notifier) {
+function BaseFormController($scope, $routeParams, Notifier, Identity) {
 
     //Note: $scope.formName, $scope.documentName, $scope.documentResource are assumed to exist.
     $scope.documentForm = null;
@@ -53,7 +53,7 @@ function BaseFormController($scope, $routeParams, Notifier) {
     };
 
     $scope.canSave = function () {
-        return $scope.documentForm.$dirty && !$scope.documentForm.$invalid;
+        return $scope.documentForm.$dirty;
     };
 
     $scope.isDirty = function () {
@@ -69,6 +69,21 @@ function BaseFormController($scope, $routeParams, Notifier) {
     };
 
     $scope.save = function() {
+        if($scope.documentForm.$invalid) {
+            Notifier.error("Form data is not valid");
+            // If form is not valid, visit each control to show validation errors...
+            var $inputs = $('input.form-control, select.form-control');
+            $inputs.each(function() {
+               $(this).focus();
+            });
+            return;
+        }
+
+        if(!Identity.isAuthorized('admin', 'staff')) {
+            Notifier.error('Not authorized to save data');
+            return;
+        }
+
         $scope.document.$save().then(
             function(doc) {
                 $scope.documentForm.$setPristine();
@@ -76,8 +91,13 @@ function BaseFormController($scope, $routeParams, Notifier) {
             },
             function(error) {
                 var reason = error;
-                if(typeof error == 'object' && error.data && error.data.reason) {
-                    reason = error.data.reason;
+                if(typeof error == 'object') {
+                    if(error.data && error.data.reason) {
+                        reason = error.data.reason;
+                    }
+                    else if (error.status == 403) {
+                        reason = "Not authorized";
+                    }
                 }
                 console.log('Problem saving: ' + reason);
                 Notifier.error('Problem saving: ' + reason);

@@ -1,5 +1,25 @@
+html {
+    min-height:99%;
+    background-color: #e2dcd8;
+    background-image: url('../content/images/GroceriesBackground.png');
+    background-repeat: no-repeat;
+    background-position:bottom;
+    background-position-x: 3px;
+}
 body {
-  padding-top: 0px;
+    padding-top: 0px;
+    background-color:transparent;
+}
+
+.jumbotron.main {
+    background-image: url('../content/images/SpoonOne.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+}
+
+.jumbotron.main p {
+    width:70%;
 }
 
 input[type="checkbox"] {
@@ -49,8 +69,13 @@ span.glyphicon.glyphicon-option-horizontal.low {
   padding-left: 5px;
 }
 
-table.table-hover {
-  cursor: pointer;
+table.table-hover tbody tr {
+    cursor: pointer;
+}
+
+table.table-hover tbody tr:hover {
+    color:black;
+    background-color: #e2dcd8;
 }
 
 table.animate-show {
@@ -78,7 +103,7 @@ table.animate-show.ng-hide {
   top: 45px;
 }
 
-input.form-control.ng-invalid.ng-touched {
+input.form-control.ng-invalid.ng-touched, select.form-control.ng-invalid.ng-touched {
     background-color: #F5B9BC;
     border: solid rgb(189, 39, 39) 1px;
 }

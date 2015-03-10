@@ -2,10 +2,15 @@ extends ../includes/layout
 
 block main-content
     .navbar.navbar-default.navbar-collapse
-        .container
+        .container-fluid
             .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#main-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
                 a.navbar-brand(href="/") Aliment
-            .navbar-collapse
+            .collapse.navbar-collapse(id="main-navbar")
                 ul.nav.navbar-nav
                     li
                         a(href="/") Home

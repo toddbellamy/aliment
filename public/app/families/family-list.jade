@@ -1,16 +1,22 @@
 .container
-    .navbar(style="z-index: 900")
-        .navbar-header
-            .navbar-brand Families
-        .navbar-collapse
-            ul.nav.navbar-nav.pull-left
-                li
-                    a.btn.btn-md(href="/families/new" ng-click="new()") New
-            ul.nav.navbar-nav.pull-right
-                li
-                    input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }", placeholder="Filter by Last Name")
-                li
-                    select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                .navbar-brand Families
+            .collapse.navbar-collapse(id="secondary-navbar")
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(href="/families/new" ng-click="new()") New
+                ul.nav.navbar-nav.pull-right
+                    li
+                        input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }", placeholder="Filter by Last Name")
+                    li
+                        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 
     table.table.table-hover.table-condensed
         thead

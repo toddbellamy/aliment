@@ -12,7 +12,12 @@ exports.getUser = function(req, res) {
     var query = (req.params.id == 0 ? {} : {_id:req.params.id});
 
     User.find(query).exec(function(err, collection) {
-        res.send(collection[0]);
+        var user = collection[0];
+        if(user.roles.length == 0) {
+            user.roles.push('guest');
+        }
+
+        res.send(user);
     });
 
     return {};
@@ -23,6 +28,8 @@ exports.createUser = function(req, res, next) {
     userData.userName = userData.userName.toLowerCase();
     userData.salt = encrypt.createSalt();
     userData.hashed_pwd = encrypt.hashPwd(userData.salt, userData.password);
+    //userData.roles.push'staff'];
+
     User.create(userData, function(err, user) {
         if(err) {
             if(err.toString().indexOf('E11000') > -1) {

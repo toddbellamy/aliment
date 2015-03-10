@@ -26,9 +26,16 @@ exports.requiresApiLogin = function() {
     }
 };
 
-exports.requiresRole = function(role) {
+exports.requiresRole = function(roles) {
     return function(req, res, next) {
-        if(!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
+        var inrole = false;
+        roles.forEach(function(role) {
+            if(req.user.roles.indexOf(role) >= 0) {
+                inrole = true;
+            }
+        });
+
+        if(!req.isAuthenticated() || !inrole) {
             res.status(403);
             res.end();
         } else {

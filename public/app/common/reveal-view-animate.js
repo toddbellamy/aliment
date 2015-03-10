@@ -9,7 +9,7 @@ angular.module('app').animation('.reveal-view-animate', function() {
             }
         },
         leave: function(element, done) {
-            element.fadeOut(100, done)
+            $(element).hide();
             return function() {
                 element.stop();
             }

@@ -11,16 +11,7 @@ section.content .navbar-header > .navbar-brand {
     padding-left: 0px;
 }
 
-/*.navbar, .navbar-collapse {*/
-    /*z-index: 900;*/
-/*}*/
-
-/*.navbar-nav > li > .dropdown-menu {*/
-    /*z-index: 1000;*/
-/*}*/
-
 .nav > li > a.btn {
-    /*color:grey;*/
     font-weight: bold;
     padding:5px 10px 5px 10px;
     margin:10px 5px 10px 5px;
@@ -30,12 +21,19 @@ section.content .navbar-header > .navbar-brand {
     padding-right:5px;
 }
 
-/*.nav > li > a.btn:hover {*/
-    /*color: #286090;*/
-/*}*/
-
 .nav > li > input, .nav > li > select {
     margin-top:10px;
+}
+
+.navbar-form button.navbar-toggle {
+    border-color: #b95d40;
+}
+.navbar-form button.navbar-toggle:hover {
+    background-color: #e3c8b5;
+}
+
+.navbar-form .navbar-toggle .icon-bar{
+    background-color: #b95d40;
 }
 
 
@@ -43,8 +41,13 @@ section.content .navbar-header > .navbar-brand {
     margin-bottom: 10px;
 }
 
-table.table {
+table.table  {
     margin-bottom:10px;
+}
+
+
+table.table tbody tr {
+    background-color:#F5F5F5;
 }
 
 .checkbox > label {
@@ -67,10 +70,12 @@ td button.btn-xs {
     margin-top:6px;
 }
 
-.pagination > li > a, .pagination > li > span {
+.pagination > li > a, .pagination > li > a.disabled, .pagination > li > span {
     color: #b95d40;
+    background-color: #f5f5f5;
 }
 
-.pagination > li > a:hover, .pagination > li > span:hover {
+.pagination > li > a:hover, .pagination > li > span:hover,
+.pagination > li > a:focus, .pagination > li > span:focus {
     color: #333333;
 }

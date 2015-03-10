@@ -1,4 +1,4 @@
-function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) {
+function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier, Identity) {
 
     $scope.formName = 'familyForm';
     $scope.documentName = 'family';
@@ -44,7 +44,7 @@ function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) 
             }
         }
 
-        $scope.family.clients.push({ lastName:'', firstName:'', _id:'000000000000000000000000' });
+        $scope.family.clients.push({ lastName:($scope.family.primaryClient ? $scope.family.primaryClient.lastName : ''), firstName:'', _id:'000000000000000000000000' });
     };
 
     $scope.removeContact = function(client) {
@@ -68,7 +68,7 @@ function FamilyDetailController($scope, $routeParams, FamilyResource, Notifier) 
         }
     };
 
-    BaseFormController.call(this, $scope, $routeParams, Notifier);
+    BaseFormController.call(this, $scope, $routeParams, Notifier, Identity);
 }
 FamilyDetailController.prototype = Object.create(BaseFormController.prototype);
 

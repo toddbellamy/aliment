@@ -16,6 +16,11 @@
                     .col-md-10
                         input.form-control(name="lastName", type="text", placeholder="Last Name", ng-model="user.lastName", required)
                 .form-group
+                    label.col-md-2.control-label(for="role") Role
+                    .col-md-10
+                        select.form-control(name="role", ng-model="user.roles[0]" required invalid-leave)
+                            option(ng-repeat='role in roles', ng-selected="staff") {{role}}
+                .form-group
                     label.col-md-2.control-label(for="password") Password
                     .col-md-10
                         input.form-control(name="password", type="password", placeholder="Password", ng-model="user.password")

@@ -1,20 +1,26 @@
 .container
-    .navbar(style="z-index: 900")
-        .navbar-header
-            .navbar-brand Family
-        .navbar-collapse
-            ul.nav.navbar-nav.pull-left
-                li
-                    a.btn.btn-md(ng-click="new()") New
-                li
-                    a.btn.btn-md(href="/visits/{{family._id}}") Visits
+    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                .navbar-brand Family
+            .collapse.navbar-collapse(id="secondary-navbar")
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(ng-click="new()") New
+                    li
+                        a.btn.btn-md(href="/visits/{{family._id}}") Visits
     .well.well-sm
         form.form-horizontal(name="familyForm")
             fieldset
                 .form-group
                     label.col-sm-2.control-label(for="primaryClient") Primary Contact
                     .col-sm-10
-                        select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" required)
+                        select.form-control(name="primaryClient", ng-model="family.primaryClient" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" required invalid-leave)
                         span.error(ng-show="familyForm.primaryClient.$touched && familyForm.primaryClient.$error.required") Please provide a Primary Contact.
                 .form-group
                     label.col-sm-2.control-label
@@ -34,11 +40,11 @@
                             tbody
                                 tr(ng-repeat="client in family.clients")
                                     td
-                                        input.form-control(name="clientLastName" ng-model="client.lastName" required)
+                                        input.form-control(name="clientLastName" ng-model="client.lastName" required invalid-leave)
                                     td
-                                        input.form-control(name="clientFirstName" ng-model="client.firstName" required)
+                                        input.form-control(name="clientFirstName" ng-model="client.firstName" required invalid-leave)
                                     td
-                                        input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" date-of-birth="", required)
+                                        input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" date-of-birth="", required invalid-leave)
                                     td(style="border:none")
                                         button.btn.btn-xs(ng-click="removeContact(client)" ng-show="client._id == 0")
                                             span.glyphicon.glyphicon-remove
@@ -62,7 +68,7 @@
                 .form-group
                     label.col-sm-2.control-label(for="address1") Address 1
                     .col-sm-4
-                        input.form-control(name="address1", type="text", placeholder="Address Line 1", ng-model="family.address1", required)
+                        input.form-control(name="address1", type="text", placeholder="Address Line 1", ng-model="family.address1", required invalid-leave)
                         span.error(ng-show="familyForm.address1.$touched && familyForm.address1.$error.required") Please enter Address Line 1.
                     label.col-sm-2.control-label(for="address2") Address 2
                     .col-sm-4
@@ -70,7 +76,7 @@
                 .form-group
                     label.col-sm-2.control-label(for="city") City
                     .col-sm-4
-                        input.form-control(name="city", type="text", placeholder="City", ng-model="family.city", required)
+                        input.form-control(name="city", type="text", placeholder="City", ng-model="family.city", required invalid-leave)
                         span.error(ng-show="familyForm.city.$touched && familyForm.city.$error.required") Please enter City.
                     label.col-sm-2.control-label(for="province") Province
                     .col-sm-4
@@ -78,20 +84,20 @@
                 .form-group
                     label.col-sm-2.control-label(for="postal") Postal Code
                     .col-sm-4
-                        input.form-control(name="postal", type="text", ng-model="family.postal", ui-mask="A9A 9A9" required)
+                        input.form-control(name="postal", type="text", ng-model="family.postal", ui-mask="A9A 9A9" required invalid-leave)
                         span.error(ng-show="familyForm.postal.$touched && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
                     label.col-sm-2.control-label(for="phone1") Phone Number
                     .col-sm-4
-                        input.form-control(name="phone1", type="text", ng-model="family.phone1", ui-mask="(999) 999-9999" required)
+                        input.form-control(name="phone1", type="text", ng-model="family.phone1", ui-mask="(999) 999-9999" required invalid-leave)
                         span.error(ng-show="familyForm.phone1.$touched && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999) 999-9999).
                 .form-group
                     label.col-sm-2.control-label(for="totalMonthlyExpenses") Monthly Expenses
                     .col-sm-4
-                        input.form-control(name="totalMonthlyExpenses", type="text", placeholder="Total Monthly Expenses", ng-model="family.totalMonthlyExpenses", smart-float, required)
+                        input.form-control(name="totalMonthlyExpenses", type="text", placeholder="Total Monthly Expenses", ng-model="family.totalMonthlyExpenses", smart-float, required invalid-leave)
                         span.error(ng-show="familyForm.totalMonthlyExpenses.$touched && (familyForm.totalMonthlyExpenses.$error.required || familyForm.totalMonthlyExpenses.$error.float)") Please enter valid Total Monthly Expenses.
                     label.col-sm-2.control-label(for="totalMonthlyIncome") Monthly Income
                     .col-sm-4
-                        input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", smart-float, required)
+                        input.form-control(name="totalMonthlyIncome", type="text", placeholder="Total Monthly Income", ng-model="family.totalMonthlyIncome", smart-float, required invalid-leave)
                         span.error(ng-show="familyForm.totalMonthlyIncome.$touched && (familyForm.totalMonthlyIncome.$error.required || familyForm.totalMonthlyIncome.$error.float)") Please enter valid Total Monthly Income.
                 .form-group-md
                     .col-md-4.col-md-offset-1

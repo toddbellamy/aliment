@@ -1,13 +1,19 @@
 .container
-    .navbar(style="z-index: 900")
-        .navbar-header
-            .navbar-brand Client
-        .navbar-collapse
-            ul.nav.navbar-nav.pull-left
-                li
-                    a.btn.btn-md(href="/families/{{client.family}}") Family
-                li
-                    a.btn.btn-md(href="/visits/{{client.family}}") Visits
+    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                .navbar-brand Client
+            .collapse.navbar-collapse(id="secondary-navbar")
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(href="/families/{{client.family}}") Family
+                    li
+                        a.btn.btn-md(href="/visits/{{client.family}}") Visits
     .well.well-sm
         form.form-horizontal(name="clientForm")
             fieldset
@@ -25,8 +31,9 @@
                     label.col-md-2.control-label(for="dateOfBirth") Date Of Birth
                     .col-md-4
                         input.form-control(name="dateOfBirth", type="date", placeholder="Date Of Birth", ng-model="client.dateOfBirth", date-of-birth="", invalid-leave required)
-                        span.error(ng-show="clientForm.dateOfBirth.$dirty && clientForm.dateOfBirth.$error.required") Please enter a Date Of Birth.
                         span.error(ng-show="clientForm.dateOfBirth.$error.dob") Date of Birth must be within past 120 years.
+                        span.error(ng-show="clientForm.dateOfBirth.$dirty && clientForm.dateOfBirth.$error.required") Please enter a Date Of Birth.
+
                 .form-group
                     .col-md-6.col-md-offset-2
                         //button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New

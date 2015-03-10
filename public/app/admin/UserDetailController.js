@@ -1,6 +1,7 @@
 angular.module('app').controller('UserDetailController', function($scope, $routeParams, Auth, User, Notifier) {
 
     $scope.verifyPassword = null;
+    $scope.roles = ['admin', 'staff', 'guest'];
 
     if($routeParams.id && $routeParams.id == "new") {
         $scope.user = new User();
@@ -14,7 +15,7 @@ angular.module('app').controller('UserDetailController', function($scope, $route
     }
 
     $scope.$watch('user.userName', function() {
-        if(!$scope.user._id && $routeParams.id == "new") {
+        if($scope.user && !$scope.user._id && $routeParams.id == "new") {
             $scope.user.password = $scope.verifyPassword = $scope.user.userName;
         }
     });

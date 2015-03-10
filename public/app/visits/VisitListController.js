@@ -5,7 +5,7 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier, Iden
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
     $scope.documentResource = VisitResource;
-    BaseFormController.call(this, $scope, $routeParams, Notifier);
+    BaseFormController.call(this, $scope, $routeParams, Notifier, Identity);
 
     $scope.sortOptions = [{value:"date",text: "Sort by Date"}, { value: "client",text: "Sort by Client" }];
     $scope.sortOrder = $scope.sortOptions[0].value;

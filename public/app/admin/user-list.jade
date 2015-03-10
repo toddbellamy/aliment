@@ -1,11 +1,17 @@
 .container
-    .navbar(style="z-index: 900")
-        .navbar-header
-            .navbar-brand Users
-        .navbar-collapse
-            ul.nav.navbar-nav.pull-left
-                li
-                    a.btn.btn-md(href="/admin/users/new" ng-click="new()") New
+    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                .navbar-brand Users
+            .collapse.navbar-collapse(id="secondary-navbar")
+                ul.nav.navbar-nav.pull-left
+                    li
+                        a.btn.btn-md(href="/admin/users/new" ng-click="new()") New
 
     table.table.table-hover.table-condensed
         tr.selectable-row(ng-repeat="user in users" ng-click="userRowClick(user._id)")
