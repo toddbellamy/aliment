@@ -18,6 +18,13 @@ body {
     background-origin: content-box;
 }
 
+a.navbar-brand {
+    padding-left: 35px;
+    background-position-y: 7px;
+    background-image: url('../favicon.gif');
+    background-repeat: no-repeat;
+}
+
 .jumbotron.main p {
     width:70%;
 }
@@ -75,7 +82,9 @@ table.table-hover tbody tr {
 
 table.table-hover tbody tr:hover {
     color:black;
-    background-color: #e2dcd8;
+    background-color: #E3C8B5;
+    /*#b95d40;*/
+    /*#e2dcd8;*/
 }
 
 table.animate-show {
