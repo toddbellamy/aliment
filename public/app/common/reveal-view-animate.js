@@ -3,7 +3,7 @@ angular.module('app').animation('.reveal-view-animate', function() {
 
         enter: function(element, done) {
             $(element).hide();
-            element.fadeIn(700, done);
+            element.fadeIn(500, done);
             return function() {
                 element.stop();
             }
