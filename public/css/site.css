@@ -129,3 +129,18 @@ span.error {
     opacity: 0.7;
     z-index:100;
 }
+
+
+.hide-loading {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+}
+
+.hide-loading.ng-hide {
+    opacity:0;
+}
+
+.gridframe {
+    min-height:400px;
+    overflow-y: auto;
+}

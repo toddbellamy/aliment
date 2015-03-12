@@ -1,6 +1,9 @@
 angular.module('app').controller('FamilyListController', function($scope, $location, FamilyResource) {
 
+    $scope.tableDataLoading = false;
+
     $scope.loadFamilies = function() {
+        $scope.tableDataLoading = true;
         $scope.families = FamilyResource.query({
                 page:$scope.currentPage,
                 size:$scope.itemsPerPage,
@@ -12,7 +15,9 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
                 if(headers.totalrowcount != $scope.pageTotalItems) {
                     $scope.pageTotalItems = headers.totalrowcount;
                 }
+                $scope.tableDataLoading = false;
             });
+
     };
 
     $scope.sortOptions = [

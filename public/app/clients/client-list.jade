@@ -14,7 +14,7 @@
                         input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
                     li
                         select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
-.container
+.container.gridframe
     table.table.table-hover.table-condensed
         thead
             tr
@@ -29,4 +29,5 @@
                     span {{client.dateOfBirth | date}}
                 td
                     span {{client.family.address1 + ', ' + client.family.city}}
+.container
     pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="loadClients()")
