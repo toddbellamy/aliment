@@ -3,9 +3,9 @@
         li.col-sm-11
             a.btn.btn-md(href="/families/{{family._id}}") Visits
     ul.nav.nav-pills.pull-right
-        li.col-sm-5
+        li.col-sm-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 250 }" placeholder="Filter by Name")
-        li.col-sm-5
+        li.col-sm-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.container-topmargin
     form.form-horizontal(name="familyVisitsForm")

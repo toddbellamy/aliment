@@ -3,9 +3,9 @@
         li.col-sm-11
             .navbar-brand Clients
     ul.nav.nav-pills.pull-right
-        li.col-sm-5
+        li.col-sm-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
-        li.col-sm-5
+        li.col-sm-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.gridframe
     table.table.table-hover.table-condensed.hide-loading(ng-hide="tableDataLoading")

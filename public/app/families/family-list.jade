@@ -1,13 +1,13 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-sm-5
+        li.col-sm-6
             .navbar-brand Families
-        li.col-sm-5
+        li.col-sm-6
             a.btn.btn-md(href="/families/new" ng-click="new()") New
     ul.nav.nav-pills.pull-right
-        li.col-sm-5
+        li.col-sm-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }", placeholder="Filter by Last Name")
-        li.col-sm-5
+        li.col-sm-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.gridframe
     table.col-sm-12.table.table-hover.table-condensed.hide-loading(ng-hide="tableDataLoading")
