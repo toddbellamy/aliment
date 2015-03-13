@@ -1,19 +1,13 @@
 .container
-    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
-        .container-fluid
-            .navbar-header
-                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
-                    span.sr-only Toggle navigation
-                    span.icon-bar
-                    span.icon-bar
-                    span.icon-bar
-                .navbar-brand Client
-            .collapse.navbar-collapse(id="secondary-navbar")
-                ul.nav.navbar-nav.pull-left
-                    li
-                        a.btn.btn-md(href="/families/{{client.family}}") Family
-                    li
-                        a.btn.btn-md(href="/visits/{{client.family}}") Visits
+    ul.nav.nav-pills.pull-left
+        li.col-sm-11
+            .navbar-brand Client
+    ul.nav.nav-pills.pull-right
+        li.col-sm-5
+            a.btn.btn-md(href="/families/{{client.family}}") Family
+        li.col-sm-5
+            a.btn.btn-md(href="/visits/{{client.family}}") Visits
+.container
     .well.well-sm
         form.form-horizontal(name="clientForm")
             fieldset

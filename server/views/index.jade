@@ -4,20 +4,29 @@ block main-content
     .navbar.navbar-default.navbar-collapse
         .container-fluid
             .navbar-header
-                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#main-navbar")
+                button.navbar-toggle.collapsed(id="mainnav-button" data-toggle="collapse" data-target="#main-navbar")
                     span.sr-only Toggle navigation
                     span.icon-bar
                     span.icon-bar
                     span.icon-bar
-                a.navbar-brand(href="/") Aliment
+                a.navbar-brand.hidden-xs(href="/")  Aliment
+                a.navbar-brand.visible-xs(href="/" data-toggle="collapse" data-target="#main-navbar") Aliment
 
             .collapse.navbar-collapse(id="main-navbar")
                 ul.nav.navbar-nav
-                    li
+                    li.hidden-xs
                         a(href="/") Home
-                    li
+                    li.visible-xs(data-toggle="collapse" data-target="#main-navbar")
+                        a(href="/") Home
+
+                    li.hidden-xs
                         a(href="/families") Families
-                    li
+                    li.visible-xs(data-toggle="collapse" data-target="#main-navbar")
+                        a(href="/families") Families
+
+                    li.hidden-xs
+                        a(href="/clients") Clients
+                    li.visible-xs(data-toggle="collapse" data-target="#main-navbar")
                         a(href="/clients") Clients
                 div(ng-include="'/partials/account/navbar-login'")
 

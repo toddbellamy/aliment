@@ -1,21 +1,14 @@
 .container
-    .navbar.navbar-form.navbar-collapse(style="z-index: 900")
-        .container-fluid
-            .navbar-header
-                button.navbar-toggle.collapsed(data-toggle="collapse" data-target="#secondary-navbar")
-                    span.sr-only Toggle navigation
-                    span.icon-bar
-                    span.icon-bar
-                    span.icon-bar
-                .navbar-brand Clients
-            .collapse.navbar-collapse(id="secondary-navbar")
-                ul.nav.navbar-nav.pull-right
-                    li
-                        input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
-                    li
-                        select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    ul.nav.nav-pills.pull-left
+        li.col-sm-11
+            .navbar-brand Clients
+    ul.nav.nav-pills.pull-right
+        li.col-sm-5
+            input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
+        li.col-sm-5
+            select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.gridframe
-    table.table.table-hover.table-condensed
+    table.table.table-hover.table-condensed.hide-loading(ng-hide="tableDataLoading")
         thead
             tr
                 th Name

@@ -18,6 +18,7 @@ section.content .navbar-header > .navbar-brand {
 }
 
 .nav > li {
+    padding-left:5px;
     padding-right:5px;
 }
 
@@ -43,6 +44,10 @@ section.content .navbar-header > .navbar-brand {
 
 table.table  {
     margin-bottom:10px;
+}
+
+.container.container-topmargin {
+    margin-top:5px;
 }
 
 
@@ -78,4 +83,8 @@ td button.btn-xs {
 .pagination > li > a:hover, .pagination > li > span:hover,
 .pagination > li > a:focus, .pagination > li > span:focus {
     color: #333333;
+}
+
+.nav-pills > li + li {
+    margin-left: 0px;
 }
