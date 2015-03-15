@@ -1,8 +1,14 @@
+.container.container-topmargin
+    ul.ul.nav.nav-pills.pull-left
+        li.col-sm-12.pull-left
+            .navbar-brand User
+    ul.ul.nav.nav-pills.pull-right
+        li.col-sm-12
+            a.btn.btn-md(ng-click="new()") New
 .container
-    .well
+    .well.well-sm
         form.form-horizontal(name="userForm")
             fieldset
-                legend User Details
                 .form-group
                     label.col-md-2.control-label(for="userName") User name
                     .col-md-10

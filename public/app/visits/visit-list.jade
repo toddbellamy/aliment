@@ -1,7 +1,9 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-sm-11
-            a.btn.btn-md(href="/families/{{family._id}}") Visits
+        li.col-md-6
+            .navbar-brand Visits
+        li.col-md-6
+            a.btn.btn-md(href="/families/{{family._id}}") Family
     ul.nav.nav-pills.pull-right
         li.col-sm-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 250 }" placeholder="Filter by Name")
@@ -59,12 +61,12 @@
                             td
                                 input.form-control(name="visitComments" ng-model="visit.comments" )
                             td
-                                input.form-control(name="visitVerification{{visit._id}}" ng-model="visit.verification" invalid-leave required)
+                                input.form-control(name="visitVerification{{visit._id}}" ng-model="visit.verification" invalid-leave required readonly)
                                 span.error(ng-show="familyVisitsForm.visitVerification{{visit._id}}.$touched && familyVisitsForm.visitVerification{{visit._id}}.$error.required") Please provide Verification.
                             td
                                 input.form-control(name="visitFoodVoucher" ng-model="visit.foodVoucher" ng-disabled="visit._id != 0")
                             td
-                                input.form-control(name="visitApprovedBy" ng-model="visit.approvedBy" ng-disabled="visit._id != 0")
+                                select.form-control(name="visitApprovedBy", ng-model="visit.approvedBy" ng-options="name for name in staffNames" ng-disabled="visit._id != 0")
                             td
                                 button.btn.btn-xs(ng-click="removeVisit(visit)" ng-show="visit._id == 0")
                                     span.glyphicon.glyphicon-remove

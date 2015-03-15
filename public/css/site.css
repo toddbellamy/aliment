@@ -7,7 +7,7 @@ html {
     background-position-x: 3px;
 }
 body {
-    padding-top: 0px;
+    padding-top: 50px;
     background-color:transparent;
 }
 
@@ -108,8 +108,8 @@ table.animate-show.ng-hide {
   cursor: pointer;
 }
 
-.toast-top-right {
-  top: 45px;
+.toast-bottom-center {
+    margin-bottom:10px;
 }
 
 input.form-control.ng-invalid.ng-touched, select.form-control.ng-invalid.ng-touched {
@@ -130,6 +130,21 @@ span.error {
     z-index:100;
 }
 
+div.viewframe {
+    /*position:relative;*/
+    /*width:500px;*/
+    /*height:500px;*/
+}
+
+.reveal-view-animate {
+    margin-left:50px;
+    margin-right:-50px;
+    /*position: absolute;*/
+    /*height: 100%;*/
+    /*width: 100%;*/
+    /*left:50px;*/
+}
+
 
 .hide-loading {
     -webkit-transition:all linear 0.5s;
@@ -147,4 +162,19 @@ span.error {
 
 ul.nav input.form-control, ul.nav select.form-control {
     /*width:175px*/
+}
+
+.modal-dialog {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    padding:20px;
+    padding-top:75px;
+    background:rgba(0,0,0, 0.5);
+    margin:0px;
+}
+
+.loginModal {
 }

@@ -1,6 +1,6 @@
 
 
-function VisitListController($scope, $routeParams, VisitResource, Notifier, Identity) {
+function VisitListController($scope, $routeParams, VisitResource, Notifier, Identity, User) {
 
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
@@ -9,6 +9,18 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier, Iden
 
     $scope.sortOptions = [{value:"date",text: "Sort by Date"}, { value: "client",text: "Sort by Client" }];
     $scope.sortOrder = $scope.sortOptions[0].value;
+
+    $scope.users = User.query(function() {
+            $scope.staffNames = (function () {
+                var staff =
+                    $scope.users.filter(function (user) {
+                        return (user.roles.indexOf('staff') >= 0 || user.roles.indexOf('admin') >= 0);
+                    });
+                return staff.map(function (user) {
+                    return user.firstName;
+                });
+            })();
+        });
 
     $scope.addVisit = function() {
 

@@ -1,26 +1,26 @@
 .navbar-right(ng-controller="NavBarLoginController")
-  form.navbar-form(ng-hide="identity.isAuthenticated()")
-    ul.nav.navbar-nav
-    .form-group
-      input.form-control(id="userName" placeholder="User name", ng-model="username")
-    .form-group
-      input.form-control(type="password", placeholder="Password", ng-model="password")
-    button.btn.btn-primary(ng-click="signin(username, password)") Sign In
-  ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
-    li.dropdown
-      a.dropdown-toggle(href="", data-toggle="dropdown")
-        | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
-        b.caret
-      ul.dropdown-menu(style="z-index:990")
-        li.hidden-xs(ng-show="identity.currentUser.isAdmin()")
-          a(href="/admin/users") User Admin
-        li.visible-xs(ng-show="identity.currentUser.isAdmin()" data-toggle="collapse" data-target="#main-navbar")
-          a(href="/admin/users") User Admin
-        li
-          a.hidden-xs(href="/profile/profile") Profile
-        li(data-toggle="collapse" data-target="#main-navbar")
-          a.visible-xs(href="/profile/profile") Profile
-        li
-          a.hidden-xs(href="", ng-click="signout()") Sign Out
-        li(data-toggle="collapse" data-target="#main-navbar")
-          a.visible-xs(href="", ng-click="signout()") Sign Out
+    form.navbar-form(ng-hide="identity.isAuthenticated()")
+        ul.nav.navbar-nav
+        .form-group
+            input.form-control(id="userName" placeholder="User name", ng-model="username")
+        .form-group
+            input.form-control(type="password", placeholder="Password", ng-model="password")
+        button.btn.btn-primary(ng-click="signin()") Sign In
+    ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
+        li.dropdown
+            a.dropdown-toggle(href="", data-toggle="dropdown")
+                | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
+                b.caret
+            ul.dropdown-menu(style="z-index:990")
+                li.hidden-xs(ng-show="identity.currentUser.isAdmin()")
+                    a(href="/admin/users") User Admin
+                li.visible-xs(ng-show="identity.currentUser.isAdmin()" data-toggle="collapse" data-target="#main-navbar")
+                    a(href="/admin/users") User Admin
+                li
+                    a.hidden-xs(href="/profile/profile") Profile
+                li(data-toggle="collapse" data-target="#main-navbar")
+                    a.visible-xs(href="/profile/profile") Profile
+                li
+                    a.hidden-xs(href="", ng-click="signout()") Sign Out
+                li(data-toggle="collapse" data-target="#main-navbar")
+                    a.visible-xs(href="", ng-click="signout()") Sign Out

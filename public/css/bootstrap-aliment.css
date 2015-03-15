@@ -26,6 +26,10 @@ section.content .navbar-header > .navbar-brand {
     margin-top:10px;
 }
 
+.navbar-form {
+    padding-left:0px;
+}
+
 .navbar-form button.navbar-toggle {
     border-color: #b95d40;
 }
@@ -36,7 +40,6 @@ section.content .navbar-header > .navbar-brand {
 .navbar-form .navbar-toggle .icon-bar{
     background-color: #b95d40;
 }
-
 
 .well-sm {
     margin-bottom: 10px;

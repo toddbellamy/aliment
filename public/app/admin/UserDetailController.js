@@ -20,6 +20,10 @@ angular.module('app').controller('UserDetailController', function($scope, $route
         }
     });
 
+    $scope.new = function() {
+        $scope.user = new User();
+    };
+
     $scope.update = function() {
         if($scope.user.password != $scope.verifyPassword) {
             Notifier.error("Passwords do not match");
