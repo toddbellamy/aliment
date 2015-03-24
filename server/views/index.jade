@@ -1,6 +1,6 @@
 extends ../includes/layout
 block main-content
-    div.modal-dialog(ng-include="'/partials/account/login-modal'" ng-controller="NavBarLoginController" ng-show="showModalLogin()")
+    div.login-dialog(ng-include="'/partials/account/login-modal'" ng-controller="NavBarLoginController" ng-show="showModalLogin()")
     .navbar.navbar-default.navbar-fixed-top.navbar-collapse
         .container-fluid
             .navbar-header

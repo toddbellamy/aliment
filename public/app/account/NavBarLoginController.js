@@ -10,7 +10,8 @@ angular.module('app').controller('NavBarLoginController', function($scope, $http
                 $scope.password = "";
                 Notifier.notify('You have successfully signed in!');
                 Auth.forceLogin = false;
-                $('#mainnav-button').click();
+                //$('#mainnav-button').click();
+                $location.path('/');
 
             } else {
                 $scope.password = "";

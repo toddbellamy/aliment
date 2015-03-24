@@ -1,115 +1,138 @@
+@screen-small: 767px; // (stand-in for bootstrap's @screen-sm variable)
+
 body.modal-open {
-  margin-right: 0px;
+  margin-right:0px;
 }
-.form-group,
-.form-group-md {
+
+.form-group, .form-group-md {
   margin-bottom: 10px;
 }
+
 .jumbotron {
-  margin-top: 15px;
+  margin-top:15px;
 }
+
 section.content .navbar-header > .navbar-brand {
   padding-left: 0px;
 }
+
 .nav > li > a.btn {
   font-weight: bold;
-  padding: 5px 10px 5px 10px;
-  margin: 10px 5px 10px 5px;
+  padding:5px 10px 5px 10px;
+  margin:10px 5px 10px 5px;
 }
+
 .nav > li {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left:5px;
+  padding-right:5px;
 }
-.nav > li > input,
-.nav > li > select {
-  margin-top: 10px;
+
+.nav > li > input, .nav > li > select {
+  margin-top:10px;
 }
+
 .navbar.navbar-fixed-top {
-  margin-right: 0px!important;
+  margin-right:0px!important;
 }
+
 .navbar-form {
-  padding-left: 0px;
+  padding-left:0px;
 }
+
 .navbar-form .form-group {
   margin-left: 10px;
 }
+
 .navbar-form button {
   margin-left: 10px;
 }
+
 .navbar-form button.navbar-toggle {
   border-color: #b95d40;
 }
 .navbar-form button.navbar-toggle:hover {
   background-color: #e3c8b5;
 }
-.navbar-form .navbar-toggle .icon-bar {
+
+.navbar-form .navbar-toggle .icon-bar{
   background-color: #b95d40;
 }
+
 .navbar-form > .navbar-nav > li > a {
   padding-top: 5px;
   padding-right: 2px;
 }
+
 .well-sm {
   margin-bottom: 10px;
 }
-table.table {
-  margin-bottom: 10px;
+
+table.table  {
+  margin-bottom:10px;
 }
+
 .container.container-topmargin {
-  margin-top: 5px;
+  margin-top:5px;
 }
-.modal-header,
-.modal-body,
+
+.modal-header, .modal-body, .modal-footer {
+  padding:10px;
+}
+
 .modal-footer {
-  padding: 10px;
+  margin-top:5px;
 }
-.modal-footer {
-  margin-top: 5px;
-}
-@media (max-width: 767px) {
+
+@media (max-width: @screen-small) {
   .modal-dialog {
     margin-top: 0px;
   }
 }
+
 .modal-dialog {
-  left: initial;
-  z-index: 9999;
+  left:initial;
+  z-index:9999;
 }
+
 .modal-body .form-horizontal .control-label {
-  text-align: right;
+  text-align:right;
 }
+
 .checkbox > label {
   font-weight: bold;
 }
+
 input.input-sm[type='checkbox'] {
   width: 18px;
   height: 18px;
-  margin-top: 1px;
-  margin-left: -25px;
+  margin-top:1px;
+  margin-left:-25px;
 }
+
 td input.input-sm[type='checkbox'] {
-  margin-left: 0px;
-  margin-top: 7px;
+  margin-left:0px;
+  margin-top:7px;
 }
+
 td button.btn-xs {
-  margin-top: 6px;
+  margin-top:6px;
 }
+
 .pagination.pagination-sm {
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top:5px;
+  margin-bottom:10px;
 }
-.pagination > li > a,
-.pagination > li > a.disabled,
-.pagination > li > span {
+
+.pagination > li > a, .pagination > li > a.disabled, .pagination > li > span {
   color: #b95d40;
   background-color: #f5f5f5;
 }
-.pagination > li > a:hover,
-.pagination > li > span:hover,
-.pagination > li > a:focus,
-.pagination > li > span:focus {
+
+.pagination > li > a:hover, .pagination > li > span:hover,
+.pagination > li > a:focus, .pagination > li > span:focus {
   color: #333333;
 }
+
 .nav-pills > li + li {
   margin-left: 0px;
 }

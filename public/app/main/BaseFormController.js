@@ -70,7 +70,7 @@ function BaseFormController($scope, $routeParams, Notifier, Identity) {
 
     $scope.save = function() {
         if($scope.documentForm.$invalid) {
-            Notifier.error("Form data is not valid");
+            Notifier.error("Please complete form.");
             // If form is not valid, visit each control to show validation errors...
             var $inputs = $('input.form-control, select.form-control');
             $inputs.each(function() {
@@ -98,9 +98,17 @@ function BaseFormController($scope, $routeParams, Notifier, Identity) {
                     else if (error.status == 403) {
                         reason = "Not authorized";
                     }
+                    else {
+                        reason = '';
+                    }
                 }
-                console.log('Problem saving: ' + reason);
-                Notifier.error('Problem saving: ' + reason);
+                console.log('Problem saving ' + reason);
+                if(reason) {
+                    Notifier.error('Problem saving: ' + reason);
+                }
+                else {
+                    Notifier.error('A problem has has occurred while saving.');
+                }
             });
     };
 

@@ -1,0 +1,54 @@
+.modal.fade(id="editVisitDialog" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true")
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type="button" data-dismiss="modal" aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title(id="gridSystemModalLabel") Visit
+            .modal-body
+                .container-fluid(style="max-height:500px; overflow-y:scroll;")
+                    form.form-horizontal(name="editVisitForm")
+                        fieldset
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitClient") Client
+                                .col-xs-9
+                                    select.form-control(name="editingVisitClient", ng-model="editingVisit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" ng-disabled="editingVisit._id != 0" required)
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitDate") Date
+                                .col-xs-9
+                                    input.form-control(name="editingVisitData" ng-value="editingVisit.date | date" readonly)
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitValue")  Value
+                                .col-xs-9
+                                    input.form-control(name="editingVisitValue" ng-model="editingVisit.value" ng-disabled="editingVisit._id != 0" smart-float invalid-leave)
+                                    span.error(ng-show="addVisitForm.editingVisitValue.$touched && addVisitForm.editingVisitValue.$error.float") Please enter valid monetary value
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitStoreVoucher") Store Voucher
+                                .col-xs-9
+                                    input.form-control(name="editingVisitStoreVoucher" ng-model="editingVisit.storeVoucher" ng-disabled="editingVisit._id != 0" )
+                            .form-group
+                                .col-xs-9.col-xs-offset-2
+                                    .checkbox
+                                        label
+                                            input.input-sm(type="checkbox", name="editingVisitReusableBagGiven", ng-model="editingVisit.reusableBagGiven")
+                                            | Reusable Bag Given
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitComments") Comments
+                                .col-xs-9
+                                    input.form-control(name="editingVisitComments" ng-model="editingVisit.comments" )
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitVerification") Verification
+                                .col-xs-9
+                                    input.form-control(name="editingVisitVerification" ng-model="editingVisit.verification" invalid-leave required readonly)
+                                    span.error(ng-show="addVisitForm.editingVisitVerification.$touched && addVisitForm.editingVisitVerification.$error.required") Please provide Verification.
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitFoodVoucher") Food Voucher
+                                .col-xs-9
+                                    input.form-control(name="editingVisitFoodVoucher" ng-model="editingVisit.foodVoucher" ng-disabled="editingVisit._id != 0")
+                            .form-group
+                                label.col-xs-3.control-label(for="editingVisitApprovedBy") Approved By
+                                .col-xs-9
+                                    select.form-control(name="editingVisitApprovedBy", ng-model="editingVisit.approvedBy" ng-options="name for name in staffNames" ng-disabled="editingVisit._id != 0")
+            .modal-footer
+                button.btn.btn-default(type="button" data-dismiss="modal") Cancel
+                button.btn.btn-primary(type="button" ng-click="submitVisit()") Save Visit

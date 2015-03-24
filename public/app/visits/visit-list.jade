@@ -1,88 +1,75 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-md-6
+        li.col-xs-6
             .navbar-brand Visits
-        li.col-md-6
+        li.col-xs-6
             a.btn.btn-md(href="/families/{{family._id}}") Family
     ul.nav.nav-pills.pull-right
-        li.col-sm-6
+        li.col-xs-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 250 }" placeholder="Filter by Name")
-        li.col-sm-6
+        li.col-xs-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.container-topmargin
     form.form-horizontal(name="familyVisitsForm")
         .well.well-sm
             fieldset
                 .form-group
-                    label.col-sm-1.control-label
-                    .col-sm-5
+                    .col-xs-5
                         p.form-control-static {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName}}
-                    .col-sm-6
+                    .col-xs-6
                         p.form-control-static {{family.phone1 | tel}}
                 .form-group
-                    label.col-sm-1.control-label
-                    .col-sm-5
+                    .col-xs-5
                         p.form-control-static {{family.address1 + ', ' + family.city + ', ' + family.province}}
-                    .col-sm-6
+                    .col-xs-6
                         p.form-control-static {{family.postal}}
         .form-group
             span
         .form-group
             .col-sm-12
-                button.btn.btn-sm(ng-click="addVisit()") Add Visit
-        .form-group
-                .col-sm-12
-                table.table.table-condensed
-                    thead
-                        tr
-                            th.col-sm-2 Client
-                            th.col-sm-2 Date
-                            th Value
-                            th Store Voucher
-                            th Reusable Bag Given
-                            th Comments
-                            th Verification
-                            th Food Voucher
-                            th Approved By
-                            th
-                    tbody
-                        tr(ng-repeat="visit in family.visits | orderBy:sortOrder:reverseOrder() | pageSlice:pageSize:currentPage | filter:searchText")
-                            td.col-sm-2
-                                select.form-control(name="visitClient", ng-model="visit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" ng-disabled="visit._id != 0" required)
-                            td.col-sm-2
-                               input.form-control(ng-value="visit.date | date" readonly)
-                            td
-                                input.form-control(name="visitValue{{visit._id}}" ng-model="visit.value" ng-disabled="visit._id != 0" smart-float invalid-leave)
-                                span.error(ng-show="familyVisitsForm.visitValue{{visit._id}}.$touched && familyVisitsForm.visitValue{{visit._id}}.$error.float") Please enter valid monetary value.
-                            td
-                                input.form-control(name="visitStoreVoucher" ng-model="visit.storeVoucher" ng-disabled="visit._id != 0" )
-                            td(style="text-align: center;")
-                                input.input-sm(name="visitReusableBagGiven" type="checkbox" ng-model="visit.reusableBagGiven" )
-                            td
-                                input.form-control(name="visitComments" ng-model="visit.comments" )
-                            td
-                                input.form-control(name="visitVerification{{visit._id}}" ng-model="visit.verification" invalid-leave required readonly)
-                                span.error(ng-show="familyVisitsForm.visitVerification{{visit._id}}.$touched && familyVisitsForm.visitVerification{{visit._id}}.$error.required") Please provide Verification.
-                            td
-                                input.form-control(name="visitFoodVoucher" ng-model="visit.foodVoucher" ng-disabled="visit._id != 0")
-                            td
-                                select.form-control(name="visitApprovedBy", ng-model="visit.approvedBy" ng-options="name for name in staffNames" ng-disabled="visit._id != 0")
-                            td
-                                button.btn.btn-xs(ng-click="removeVisit(visit)" ng-show="visit._id == 0")
-                                    span.glyphicon.glyphicon-remove
-                nav.nav-sm
-                    ul.pagination.pagination-sm
-                        li
-                            a(href="#" aria-label="Previous" ng-click="firstPage()")
-                                span.glyphicon.glyphicon-step-backward
-                        li(ng-repeat="pageIndex in visitPages()")
-                            a(href="#" ng-click="setPage(pageIndex)")
-                                span {{pageIndex}}
-                        li
-                            a(href="#" aria-label="Previous" ng-click="lastPage()")
-                                span.glyphicon.glyphicon-step-forward
-                    .col-sm-4.col-sm-offset-8
-                        .pull-right
-                            button.btn.btn-primary(ng-click="saveVisits()", ng-disabled="!canSave()") Submit
-                            | &nbsp;
-                            button.btn.btn-default(ng-click="cancel()", ng-disabled="!canCancel()") Cancel
+                button.btn.btn-sm.btn-primary(ng-click="showAddVisit()") Add Visit
+.container.gridframe
+    table.table.table-hover.table-condensed.table-rowspace.hide-loading
+        thead
+            tr
+                th Client
+                th Date
+                th.hidden-xs Value
+                th.hidden-xs Store Voucher
+                th.hidden-xs Reusable Bag Given
+                th.hidden-xs Comments
+                th Verification
+                th.hidden-xs Food Voucher
+                th.hidden-xs Approved By
+        tbody.solidback
+            tr.selectable-row(ng-repeat="visit in family.visits | orderBy:sortOrder:reverseOrder() | pageSlice:pageSize:currentPage | filter:searchText" ng-click="editVisit(visit)")
+                td
+                    span {{visit.client.lastName + ', ' + visit.client.firstName}}
+                td
+                    span {{visit.date | date}}
+                td.hidden-xs
+                    span {{visit.value | currency}}
+                td.hidden-xs
+                    span {{visit.storeVoucher}}
+                td.hidden-xs
+                    span {{visit.reusableBagGiven}}
+                td.hidden-xs
+                    span {{visit.comments}}
+                td
+                    span {{visit.verification}}
+                td.hidden-xs
+                    span {{visit.foodVoucher}}
+                td.hidden-xs
+                    span {{visit.approvedBy}}
+    nav.nav-sm
+        ul.pagination.pagination-sm
+            li
+                a(href="#" aria-label="Previous" ng-click="firstPage()")
+                    span.glyphicon.glyphicon-step-backward
+            li(ng-repeat="pageIndex in visitPages()")
+                a(href="#" ng-click="setPage(pageIndex)")
+                    span {{pageIndex}}
+            li
+                a(href="#" aria-label="Previous" ng-click="lastPage()")
+                    span.glyphicon.glyphicon-step-forward
+

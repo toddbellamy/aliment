@@ -1,20 +1,20 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-sm-11
+        li.col-xs-11
             .navbar-brand Clients
     ul.nav.nav-pills.pull-right
-        li.col-sm-6
+        li.col-xs-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }" placeholder="Filter by Last Name")
-        li.col-sm-6
+        li.col-xs-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.gridframe
-    table.table.table-hover.table-condensed.hide-loading(ng-hide="tableDataLoading")
+    table.table.table-hover.table-condensed.table-rowspace.hide-loading(ng-hide="tableDataLoading")
         thead
             tr
                 th Name
                 th Date of Birth
                 th Family Address
-        tbody
+        tbody.solidback
             tr.selectable-row(ng-repeat="client in clients" ng-click="clientRowClick(client._id)")
                 td
                     span {{client.lastName + ', ' + client.firstName}}

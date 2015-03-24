@@ -1,38 +1,54 @@
+
+@lighttanbackground: #E2DCD8;
+@lightgreybackground: #F5F5F5;
+@medsandbackground: #E3C8B5;
+@redbackground: #B80505;
+@medredbackground: #BD2727;
+@pinkbackground: #F5B9BC;
+
+
 html {
-  min-height: 99%;
-  background-color: #e2dcd8;
+  min-height:99%;
+  background-color: @lighttanbackground;
   background-image: url('../content/images/GroceriesBackground.png');
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position:bottom;
   background-position-x: 3px;
 }
+
 body {
   padding-top: 50px;
-  background-color: transparent;
+  background-color:transparent;
 }
+
 .jumbotron.main {
   background-image: url('../content/images/SpoonOne.png');
   background-position: right;
   background-repeat: no-repeat;
   background-origin: content-box;
 }
+
 .jumbotron.main p {
-  width: 70%;
+  width:70%;
 }
+
 a.navbar-brand {
   padding-left: 35px;
   background-position-y: 7px;
   background-image: url('../favicon.gif');
   background-repeat: no-repeat;
 }
+
 input[type="checkbox"] {
   font-size: 3em;
   margin-right: 5px;
 }
+
 .lg-label {
   font-size: 20px;
   padding: 10px 15px;
 }
+
 footer.fixed-bottom {
   bottom: 0px;
   height: 20px;
@@ -42,113 +58,142 @@ footer.fixed-bottom {
   padding-left: 10px;
   width: 100%;
 }
+
 footer a {
   font-size: 0.8em;
 }
+
 span.glyphicon.showhide-triangle {
   padding-left: 5px;
   top: 3px;
 }
+
 span.glyphicon.glyphicon-option-horizontal {
   top: 4px;
   padding-left: 7px;
 }
+
 table.table.table-condensed th {
-  min-width: 75px;
+  min-width:75px;
 }
+
 table.table-hover tbody tr {
   cursor: pointer;
 }
+
 table.table-hover tbody tr:hover {
   color: black;
-  background-color: #e3c8b5;
+  background-color: @medsandbackground;
 }
+
 table.animate-show {
   opacity: 1;
+
 }
+
 table.animate-show.ng-hide-add.ng-hide-add-active,
 table.animate-show.ng-hide-remove.ng-hide-remove-active {
   -webkit-transition: all linear 0.5s;
   transition: all linear 0.5s;
 }
+
 table.animate-show.ng-hide {
   opacity: 0;
 }
+
+
 td.deletebuttoncell {
-  border: none!important;
-  padding-left: 3px!important;
+  border:none!important;
+  padding-left:3px!important;
 }
+
 .nav,
 .pagination,
 .carousel,
 .panel-title a {
   cursor: pointer;
 }
+
 .toast-bottom-center {
-  margin-bottom: 10px;
+  margin-bottom:10px;
 }
-input.form-control.ng-invalid.ng-touched,
-select.form-control.ng-invalid.ng-touched {
-  background-color: #f5b9bc;
-  border: solid #bd2727 1px;
+
+input.form-control.ng-invalid.ng-touched, select.form-control.ng-invalid.ng-touched {
+  background-color: @pinkbackground;
+  border: solid @medredbackground 1px;
 }
+
 span.error {
   position: fixed;
-  background: #b80505;
+  background: @redbackground;
   border-radius: 3px;
   margin-top: 2px;
   padding: 3px;
   font-size: 0.8em;
   color: white;
   opacity: 0.7;
-  z-index: 100;
+  z-index:100;
 }
+
 .reveal-view-animate {
-  margin-left: 50px;
-  margin-right: -50px;
+  margin-left:50px;
+  margin-right:-50px;
+
 }
+
 .hide-loading {
-  -webkit-transition: all linear 0.5s;
-  transition: all linear 0.5s;
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
 }
+
 .hide-loading.ng-hide {
-  opacity: 0;
+  opacity:0;
 }
+
 .gridframe {
-  min-height: 413px;
+  min-height:413px;
   overflow-y: auto;
 }
+
 .login-dialog {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  padding-top: 65px;
-  background: rgba(0, 0, 0, 0.5);
-  margin: 0px;
-  z-index:9999;
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  padding:20px;
+  padding-top:65px;
+  background:rgba(0,0,0, 0.5);
+  margin:0px;
 }
+
 .horiz-scroll-frame {
-  overflow-x: scroll;
-  padding-top: 7px;
+  overflow-x:scroll;
+  padding-top:7px;
 }
+
 table.table-rowspace {
   border-collapse: separate;
   border-spacing: 0px 5px;
 }
+
 table.table-rowspace.tight {
   border-spacing: 0px 1px;
 }
+
 table.table-rowspace tbody > tr {
-  background-color: #f5f5f5;
+  background-color: @lightgreybackground;
 }
+
 table.table-rowspace thead > tr > th,
 table.table-rowspace tbody > tr > td,
 table.table-rowspace tfoot > tr > td {
   border: none;
 }
+
 table.transback tbody > tr {
   background-color: transparent;
 }
+
+
+

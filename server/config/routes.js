@@ -18,7 +18,6 @@ module.exports = function(app, req, res) {
     app.post('/api/clients/:id', auth.requiresRole(['admin', 'staff']), clients.saveClient);
     app.post('/api/clients/', auth.requiresRole(['admin', 'staff']), clients.saveClient);
 
-
     app.get('/api/families/:id', auth.requiresApiLogin(), families.getFamily);
     app.get('/api/families/', auth.requiresApiLogin(), families.getFamilies);
     app.post('/api/families/:id', auth.requiresRole(['admin', 'staff']), families.saveFamily);

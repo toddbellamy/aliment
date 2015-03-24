@@ -6,6 +6,7 @@
         li.col-sm-12
             a.btn.btn-md(href="/admin/users/new" ng-click="new()") New
 .container
-    table.table.table-hover.table-condensed
-        tr.selectable-row(ng-repeat="user in users" ng-click="userRowClick(user._id)")
-            td {{user.firstName + ' ' + user.lastName}}
+    table.table.table-hover.table-condensed.table-rowspace
+        tbody.solidback
+            tr.selectable-row(ng-repeat="user in users" ng-click="userRowClick(user._id)")
+                td {{user.firstName + ' ' + user.lastName}}

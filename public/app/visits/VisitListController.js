@@ -1,6 +1,5 @@
 
-
-function VisitListController($scope, $routeParams, VisitResource, Notifier, Identity, User) {
+function VisitListController($scope, $http, $compile, $routeParams, VisitResource, Notifier, Identity, User) {
 
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
@@ -22,27 +21,40 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier, Iden
             })();
         });
 
-    $scope.addVisit = function() {
+    $scope.editingVisit = null;
 
-        checkRegistrationStatus($scope.family, Notifier);
+    $scope.dialogContent = null;
+    $scope.fetchDialogContent = function() {
+        $http.get('/partials/visits/visit-dialog').then(function(result){
+            $scope.dialogContent = result.data;
+        });
+    }
 
-        if($scope.sortOrder != 'date') {
-            $scope.sortOrder = 'date';
-        }
+    $scope.fetchDialogContent();
+
+    function displayVisitDialog() {
+        $('#editVisitDialog').remove();
+
+        var dialogElement = angular.element($scope.dialogContent);
+        angular.element(document.body).prepend(dialogElement);
+        $compile(dialogElement)($scope);
+
+        $('#editVisitDialog').modal('show');
+    }
+
+    $scope.showAddVisit = function() {
+
+        $scope.editingVisit = createNewVisit();
+        displayVisitDialog();
+    };
+
+    function createNewVisit() {
 
         if(!$scope.family.visits) {
             $scope.family.visits = [];
         }
 
-        if($scope.family.visits.length > 0) {
-            if(!$scope.family.visits[$scope.family.visits.length - 1].date ||
-                !$scope.family.visits[$scope.family.visits.length - 1].client ||
-                !$scope.family.visits[$scope.family.visits.length - 1].verification) {
-                return;
-            }
-        }
-
-        $scope.family.visits.push({
+        return {
             client:$scope.family.primaryClient,
             date:new Date(),
             value:0.00,
@@ -53,15 +65,66 @@ function VisitListController($scope, $routeParams, VisitResource, Notifier, Iden
             foodVoucher:'',
             approvedBy:'',
             _id:'000000000000000000000000'
-        });
+        };
+    }
 
+    $scope.editVisit = function(visit) {
+        $scope.editingVisit = visit;
+        displayVisitDialog();
     };
 
-    $scope.removeVisit = function(visit) {
-        if($scope.family.visits && $scope.family.visits.length > 0) {
-            var index = $scope.family.visits.indexOf(visit);
-            $scope.family.visits.splice(index, 1);
+
+    $scope.editVisitDialog$ = null;
+
+    $scope.submitVisit = function () {
+        if($scope.editVisitForm.$invalid) {
+            Notifier.error("Please complete form.");
+            // If form is not valid, visit each control to show validation errors...
+            var $inputs = $('input.form-control, select.form-control');
+            $inputs.each(function() {
+                $(this).focus();
+            });
+            return;
         }
+
+        var addToFamily = ($scope.editingVisit._id == 0);
+
+        if(addToFamily) {
+            $scope.family.visits.push($scope.editingVisit);
+        }
+
+        $scope.document.$save().then(
+            function(doc) {
+                $scope.editVisitForm.$setPristine();
+                $('#editVisitDialog').modal('hide');
+                Notifier.notify('Saved successfully!');
+                checkRegistrationStatus($scope.family, Notifier);
+
+            },
+            function(error) {
+                var reason = error;
+                if(typeof error == 'object') {
+                    if(error.data && error.data.reason) {
+                        reason = error.data.reason;
+                    }
+                    else if (error.status == 403) {
+                        reason = "Not authorized";
+                    }
+                    else {
+                        reason = '';
+                    }
+                }
+                console.log('Problem saving: ' + reason);
+
+                if(reason) {
+                    Notifier.error('Problem saving: ' + reason);
+                }
+                else {
+                    Notifier.error('A problem has has occurred while saving.');
+                }
+            });
+
+
     };
 
     $scope.reverseOrder = function() {

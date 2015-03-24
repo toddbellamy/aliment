@@ -1,16 +1,16 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-sm-6
+        li.col-xs-6
             .navbar-brand Families
-        li.col-sm-6
+        li.col-xs-6
             a.btn.btn-md(href="/families/new" ng-click="new()") New
     ul.nav.nav-pills.pull-right
-        li.col-sm-6
+        li.col-xs-6
             input.form-control(ng-model="searchText", ng-model-options="{ debounce: 500 }", placeholder="Filter by Last Name")
-        li.col-sm-6
+        li.col-xs-6
             select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
 .container.gridframe
-    table.col-sm-12.table.table-hover.table-condensed.hide-loading(ng-hide="tableDataLoading")
+    table.table.table-hover.table-condensed.table-rowspace.hide-loading(rowspacing="3px" ng-hide="tableDataLoading")
         thead
             tr
                 th Primary Contact
@@ -19,7 +19,7 @@
                 th City
                 th.hidden-xs Postal
                 th.hidden-xs Date Added
-        tbody
+        tbody.solidback
             tr.selectable-row(ng-repeat="family in families | filter:searchText | orderBy:sortOrder" ng-click="familyRowClick(family._id)")
                 td
                     span {{family.primaryClient.lastName + ', ' + family.primaryClient.firstName }}

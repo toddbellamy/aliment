@@ -1,11 +1,11 @@
 .container
     ul.nav.nav-pills.pull-left
-        li.col-sm-12
+        li.col-xs-12
             .navbar-brand Family
     ul.nav.nav-pills.pull-right
-        li.col-sm-6
+        li.col-xs-6
             a.btn.btn-md(ng-click="new()") New
-        li.col-sm-6
+        li.col-xs-6
             a.btn.btn-md(href="/visits/{{family._id}}") Visits
 .container
     .well.well-sm
@@ -21,11 +21,15 @@
                     .col-sm-10
                         button.btn.btn-sm(ng-click="addContact()") Add Contact
                 .form-group
-                    label.col-sm-2.control-label(ng-click="toggleContacts()") Contacts
+
+                    label.hidden-xs.col-sm-2.control-label(ng-click="toggleContacts()") Contacts
                         span.glyphicon.showhide-triangle(ng-class="showContactsTriangle")
-                    .col-sm-10
-                        span.glyphicon.glyphicon-option-horizontal.low(ng-show="!showContacts" ng-click="toggleContacts()")
-                        table.table.table-condensed.animate-show(ng-show="showContacts")
+                    label.visible-xs.col-sm-6.control-label(ng-click="toggleContacts()") Contacts
+                        span.glyphicon.showhide-triangle(ng-class="showContactsTriangle")
+                        span.glyphicon.glyphicon-option-horizontal(ng-show="!showContacts")
+                    .col-sm-10.horiz-scroll-frame
+                        span.hidden-xs.glyphicon.glyphicon-option-horizontal(ng-show="!showContacts" ng-click="toggleContacts()")
+                        table.table.table-condensed.table-rowspace.tight.transback.animate-show(ng-show="showContacts")
                             thead
                                 tr
                                     th Last Name
@@ -39,7 +43,7 @@
                                         input.form-control(name="clientFirstName" ng-model="client.firstName" required invalid-leave)
                                     td
                                         input.form-control(name="clientDateOfBirth" type="date" ng-model="client.dateOfBirth" date-of-birth="", required invalid-leave)
-                                    td(style="border:none")
+                                    td.deletebuttoncell
                                         button.btn.btn-xs(ng-click="removeContact(client)" ng-show="client._id == 0")
                                             span.glyphicon.glyphicon-remove
                             tfoot
@@ -82,7 +86,7 @@
                         span.error(ng-show="familyForm.postal.$touched && (familyForm.postal.$error.required || familyForm.postal.$error.pattern)") Please enter a valid Postal Code.
                     label.col-sm-2.control-label(for="phone1") Phone Number
                     .col-sm-4
-                        input.form-control(name="phone1", type="text", ng-model="family.phone1", ui-mask="(999) 999-9999" required invalid-leave)
+                        input.form-control(name="phone1", type="text", ng-model="family.phone1" ui-mask="(999) 999-9999" required invalid-leave)
                         span.error(ng-show="familyForm.phone1.$touched && (familyForm.phone1.$error.required || familyForm.phone1.$error.pattern)") Please enter a valid phone number (999) 999-9999).
                 .form-group
                     label.col-sm-2.control-label(for="totalMonthlyExpenses") Monthly Expenses
@@ -119,9 +123,8 @@
                                 span.glyphicon.glyphicon-pencil
                     .col-sm-4
                 .form-group
-                    .col-sm-6.col-sm-offset-2
+                    .col-sm-10.col-sm-offset-2
                         button.btn.btn-primary(ng-click="new()", ng-disabled="canCancel()") New
-                    .col-sm-4
                         .pull-right
                             button.btn.btn-primary(ng-click="save()", ng-disabled="!canSave()") Submit
                             | &nbsp;
