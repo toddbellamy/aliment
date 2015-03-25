@@ -1,8 +1,11 @@
-angular.module('app').controller('FamilyListController', function($scope, $location, FamilyResource) {
+angular.module('app').controller('FamilyListController', function($scope, $location, FamilyResource, TableHelper) {
 
     $scope.tableDataLoading = false;
 
     $scope.loadFamilies = function() {
+        var clientTable$ = $('table.table');
+        TableHelper.freezeColWidths(clientTable$, true);
+
         $scope.tableDataLoading = true;
         $scope.families = FamilyResource.query({
                 page:$scope.currentPage,
@@ -16,6 +19,7 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
                     $scope.pageTotalItems = headers.totalrowcount;
                 }
                 $scope.tableDataLoading = false;
+                TableHelper.freezeColWidths(clientTable$, false);
             });
 
     };
@@ -45,7 +49,7 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
     $scope.itemsPerPage = 12;
     $scope.pageTotalItems = 1;
     $scope.currentPage = 1;
-    $scope.pageMaxSize = 10;
+    $scope.pageMaxSize = 8;
 
     $scope.setPage = function (pageNo) {
         $scope.currentPage = pageNo;

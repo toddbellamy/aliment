@@ -7,12 +7,14 @@ var appserver;
 require('./server/config/express')(app, config);
 require('./server/config/mongoose')(config);
 require('./server/config/passport')();
-require('./server/config/routes')(app);
+require('./server/config/routes')(app, config);
 
 var boot = function() {
     appserver = app.listen(config.port);
     console.log('Listening on port ' + config.port + '...');
-}
+    console.log('DEMO:' + process.env.DEMO);
+    app.demoMode = process.env.DEMO;
+};
 
 var shutdown = function() {
     appserver.close();

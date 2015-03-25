@@ -1,4 +1,8 @@
 @screen-small: 767px; // (stand-in for bootstrap's @screen-sm variable)
+@burntorange: #B95D40;
+@medsandbackground: #E3C8B5;
+@lightgreybackground: #F5F5F5;
+
 
 body.modal-open {
   margin-right:0px;
@@ -48,14 +52,14 @@ section.content .navbar-header > .navbar-brand {
 }
 
 .navbar-form button.navbar-toggle {
-  border-color: #b95d40;
+  border-color: @burntorange;
 }
 .navbar-form button.navbar-toggle:hover {
-  background-color: #e3c8b5;
+  background-color: @medsandbackground;
 }
 
 .navbar-form .navbar-toggle .icon-bar{
-  background-color: #b95d40;
+  background-color: @burntorange;
 }
 
 .navbar-form > .navbar-nav > li > a {
@@ -109,6 +113,10 @@ input.input-sm[type='checkbox'] {
   margin-left:-25px;
 }
 
+.btn.btn-default.btn-small {
+  color: @burntorange;
+}
+
 td input.input-sm[type='checkbox'] {
   margin-left:0px;
   margin-top:7px;
@@ -123,14 +131,18 @@ td button.btn-xs {
   margin-bottom:10px;
 }
 
+.pagination > li > a {
+  margin-right:4px;
+}
+
 .pagination > li > a, .pagination > li > a.disabled, .pagination > li > span {
-  color: #b95d40;
-  background-color: #f5f5f5;
+  color: @burntorange;
+  background-color: @lightgreybackground;
 }
 
 .pagination > li > a:hover, .pagination > li > span:hover,
 .pagination > li > a:focus, .pagination > li > span:focus {
-  color: #333333;
+  color: @gray-darker;
 }
 
 .nav-pills > li + li {

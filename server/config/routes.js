@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     visits = require('../controllers/visits');
     User = mongoose.model('User');
 
-module.exports = function(app, req, res) {
+module.exports = function(app, config, req, res) {
 
     app.get('/api/users/:id', auth.requiresRole(['admin']), users.getUser);
     app.get('/api/users', auth.requiresRole(['admin']), users.getUsers);
@@ -43,7 +43,8 @@ module.exports = function(app, req, res) {
 
     app.get('*', function (req, res) {
         res.render('index', {
-            bootstrappedUser: req.user
+            bootstrappedUser: req.user,
+            demoMode:config.demoMode
         });
     });
 };

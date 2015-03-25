@@ -45,7 +45,7 @@ var getFamiliesPaged = function(req, res) {
 
     if(req.query.filter) {
 
-        Client.find({ lastName: { $regex : req.query.filter }})
+        Client.find({ lastName: { $regex : new RegExp("^" + req.query.filter, "i") }})
             .select('_id')
             .exec(function(err, clients) {
 

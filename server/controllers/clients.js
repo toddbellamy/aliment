@@ -16,8 +16,8 @@ var getClientsPaged = function(req, res) {
     var query, innerQuery;
 
     if(req.query.filter) {
-        query = Client.find({ lastName: { $regex : req.query.filter }});
-        innerQuery = Client.find({ lastName: { $regex : req.query.filter }});
+        query = Client.find({ lastName: { $regex : new RegExp("^" + req.query.filter, "i") }});
+        innerQuery = Client.find({ lastName: { $regex : new RegExp("^" + req.query.filter, "i") }});
     }
     else {
         query = Client.find({});

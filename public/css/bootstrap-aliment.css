@@ -87,6 +87,9 @@ input.input-sm[type='checkbox'] {
   margin-top: 1px;
   margin-left: -25px;
 }
+.btn.btn-default.btn-small {
+  color: #b95d40;
+}
 td input.input-sm[type='checkbox'] {
   margin-left: 0px;
   margin-top: 7px;
@@ -97,6 +100,9 @@ td button.btn-xs {
 .pagination.pagination-sm {
   margin-top: 5px;
   margin-bottom: 10px;
+}
+.pagination > li > a {
+  margin-right: 4px;
 }
 .pagination > li > a,
 .pagination > li > a.disabled,

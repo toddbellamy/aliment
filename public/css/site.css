@@ -115,7 +115,7 @@ span.error {
   opacity: 0;
 }
 .gridframe {
-  min-height: 413px;
+  min-height: 470px;
   overflow-y: auto;
 }
 .login-dialog {
@@ -128,7 +128,6 @@ span.error {
   padding-top: 65px;
   background: rgba(0, 0, 0, 0.5);
   margin: 0px;
-  z-index:9999;
 }
 .horiz-scroll-frame {
   overflow-x: scroll;
@@ -151,4 +150,7 @@ table.table-rowspace tfoot > tr > td {
 }
 table.transback tbody > tr {
   background-color: transparent;
+}
+div.centered {
+  text-align: center;
 }
