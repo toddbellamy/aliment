@@ -2,7 +2,7 @@
 @burntorange: #B95D40;
 @medsandbackground: #E3C8B5;
 @lightgreybackground: #F5F5F5;
-
+@darkgrey: #333;
 
 body.modal-open {
   margin-right:0px;
@@ -131,8 +131,12 @@ td button.btn-xs {
   margin-bottom:10px;
 }
 
-.pagination > li > a {
+.pagination > li > a, .pagination > li > span {
+  width:32px;
+  text-align:center;
   margin-right:4px;
+  margin-top:4px;
+  margin-left:0px;
 }
 
 .pagination > li > a, .pagination > li > a.disabled, .pagination > li > span {
@@ -142,7 +146,11 @@ td button.btn-xs {
 
 .pagination > li > a:hover, .pagination > li > span:hover,
 .pagination > li > a:focus, .pagination > li > span:focus {
-  color: @gray-darker;
+  color: @darkgrey;
+}
+
+.pagination > li:nth-child(2) > a, .pagination > li:nth-child(2) > span {
+  padding-left:5px;
 }
 
 .nav-pills > li + li {

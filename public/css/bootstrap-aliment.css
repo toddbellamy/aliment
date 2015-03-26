@@ -101,8 +101,13 @@ td button.btn-xs {
   margin-top: 5px;
   margin-bottom: 10px;
 }
-.pagination > li > a {
+.pagination > li > a,
+.pagination > li > span {
+  width: 32px;
+  text-align: center;
   margin-right: 4px;
+  margin-top: 4px;
+  margin-left: 0px;
 }
 .pagination > li > a,
 .pagination > li > a.disabled,
@@ -115,6 +120,10 @@ td button.btn-xs {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   color: #333333;
+}
+.pagination > li:nth-child(2) > a,
+.pagination > li:nth-child(2) > span {
+  padding-left: 5px;
 }
 .nav-pills > li + li {
   margin-left: 0px;
