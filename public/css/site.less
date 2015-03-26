@@ -1,4 +1,5 @@
-
+@screen-xs: 400px;
+@screen-small: 767px;
 @lighttanbackground: #E2DCD8;
 @lightgreybackground: #F5F5F5;
 @medsandbackground: #E3C8B5;
@@ -22,15 +23,51 @@ body {
 }
 
 .jumbotron.main {
-  background-image: url('../content/images/SpoonOne.png');
-  background-position: right;
-  background-repeat: no-repeat;
-  background-origin: content-box;
+  overflow: hidden;
+}
+
+@media(max-width: @screen-small) {
+  .jumbotron.main {
+    padding-right:0px;
+  }
 }
 
 .jumbotron.main p {
   width:70%;
 }
+
+.main-title-section {
+  width:60%;
+}
+
+.spoon-image {
+  float: right;
+}
+
+@media(min-width: @screen-xs) {
+  .spoon-image {
+    width: 140px;
+    height: 140px;
+    shape-outside: polygon(140px 0px, 140px 140px, 5px 140px, 5px 100px, 90px 0px);
+  }
+}
+
+@media(max-width: @screen-xs) {
+  .spoon-image {
+    margin-top:30px;
+    width: 110px;
+    height: 110px;
+    shape-outside: polygon(110px 0px, 110px 140px, 5px 140px, 5px 100px, 90px 0px);
+  }
+}
+
+//
+//.spoon-section {
+//  display:inline-block;
+//  width:32%;
+//  height:140px;
+//
+//}
 
 a.navbar-brand {
   padding-left: 35px;
