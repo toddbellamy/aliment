@@ -69,6 +69,7 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
 
     $scope.editVisit = function(visit) {
         $scope.editingVisit = visit;
+        $scope.approvedByPassword = "";
         displayVisitDialog();
     };
 
@@ -92,8 +93,14 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
                 return;
             }
             else {
+                if($scope.editingVisit.approvedBy.userName == $scope.editingVisit.verification.userName) {
+                    Notifier.error("Approved By must be different User than Verification");
+                    $scope.approvedByPassword = "";
+                    return;
+                }
                 if(!$scope.approvedByPassword) {
                     Notifier.error("Approved By Password is required.");
+                    $scope.approvedByPassword = "";
                     return;
                 }
                 else {
@@ -153,6 +160,8 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
                     Notifier.error('A problem has has occurred while saving.');
                 }
             });
+
+        $scope.approvedByPassword = "";
     }
 
     $scope.cancelEdit = function() {

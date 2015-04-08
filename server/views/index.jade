@@ -1,6 +1,6 @@
 extends ../includes/layout
 block main-content
-    div.login-dialog(ng-include="'/partials/account/login-modal'" ng-controller="NavBarLoginController" ng-show="showModalLogin()")
+    div.visible-xs.login-dialog(ng-include="'/partials/account/login-modal'" ng-controller="NavBarLoginController" ng-show="showModalLogin()")
     .navbar.navbar-default.navbar-fixed-top.navbar-collapse
         .container-fluid
             .navbar-header
@@ -24,7 +24,7 @@ block main-content
                         a(href="/clients") Clients
                     li.visible-xs(data-toggle="collapse" data-target="#main-navbar")
                         a(href="/clients") Clients
-                div(ng-include="'/partials/account/navbar-login'" )
+                div(ng-include="'/partials/account/navbar-login'")
     section.content
         div.viewframe
             div.reveal-view-animate(ng-view)
