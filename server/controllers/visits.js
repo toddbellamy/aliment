@@ -12,7 +12,7 @@ var loadAndSendFamily = function(res, query) {
             if(family.visits && family.visits.length > 0) {
                 var popCount = 0;
                 family.visits.forEach(function (visit) {
-                    visit.populate('client', function (err) {
+                    visit.populate(['verification', 'client', 'approvedBy'], function (err) {
                         popCount += 1;
                         if (popCount == family.visits.length) {
                             res.send(family);
@@ -35,9 +35,8 @@ exports.getFamilyWithVisits = function(req, res) {
 };
 
 exports.saveVisits = function(req, res) {
-    var data = req.body;
 
-    var handleError = function(err) {
+    var handleError = function (err) {
         if (err.toString().indexOf('E11000') > -1) {
             err = new Error('Duplicate Family');
         }
@@ -45,60 +44,70 @@ exports.saveVisits = function(req, res) {
         return res.send({reason: err.toString()});
     };
 
-    var family = {
-        visits:[]
-    };
+    try {
+        var data = req.body;
 
-    var saveFamily = function(res) {
-
-        Family.update({_id: data._id}, family, function (err) {
-            if (err) {
-                return handleError(err);
-            }
-
-            loadAndSendFamily(res, { _id:data._id });
-        });
-    };
-
-    data.visits.forEach(function(visitData) {
-
-        var visit = {
-            date:visitData.date,
-            value:visitData.value,
-            storeVoucher:visitData.storeVoucher,
-            reusableBagGiven:visitData.reusableBagGiven,
-            comments:visitData.comments,
-            verification:visitData.verification,
-            foodVoucher:visitData.foodVoucher,
-            approvedBy:visitData.approvedBy,
-            client:visitData.client._id
+        var family = {
+            visits: []
         };
 
-        if (!visitData._id || visitData._id == 0) {
-            Visit.create(visit, function(err, savedVisit) {
+        var saveFamily = function (res) {
 
+            Family.update({_id: data._id}, family, function (err) {
                 if (err) {
-                    handleError(err);
+                    return handleError(err);
                 }
 
-                family.visits.push(savedVisit._id);
-                if(family.visits.length == data.visits.length) {
-                    saveFamily(res);
-                }
+                loadAndSendFamily(res, {_id: data._id});
             });
-        }
-        else {
-            Visit.update({_id: visitData._id}, visit, function (err) {
+        };
 
-                if (err) {
-                    handleError(err);
-                }
+        data.visits.forEach(function (visitData) {
 
-                family.visits.push(visitData._id);
-                if(family.visits.length == data.visits.length) {
-                    saveFamily(res);
-                }
-            });
-        }
-    });
+            var visit = {
+                date: visitData.date,
+                value: visitData.value,
+                storeVoucher: visitData.storeVoucher,
+                reusableBagGiven: visitData.reusableBagGiven,
+                comments: visitData.comments,
+                verification: visitData.verification._id,
+                foodVoucher: visitData.foodVoucher,
+                client: visitData.client._id
+            };
+
+            if (visitData.approvedBy) {
+                visit.approvedBy = visitData.approvedBy._id;
+            }
+
+            if (!visitData._id || visitData._id == 0) {
+                Visit.create(visit, function (err, savedVisit) {
+
+                    if (err) {
+                        handleError(err);
+                    }
+
+                    family.visits.push(savedVisit._id);
+                    if (family.visits.length == data.visits.length) {
+                        saveFamily(res);
+                    }
+                });
+            }
+            else {
+                Visit.update({_id: visitData._id}, visit, function (err) {
+
+                    if (err) {
+                        handleError(err);
+                    }
+
+                    family.visits.push(visitData._id);
+                    if (family.visits.length == data.visits.length) {
+                        saveFamily(res);
+                    }
+                });
+            }
+        });
+    }
+    catch(e) {
+        handleError(e);
+    }
 };

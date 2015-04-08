@@ -15,6 +15,19 @@ angular.module('app').factory('Auth', function($http, Identity, $q, User, Notifi
             return deferred.promise;
         },
 
+        verifyUser: function(username, password) {
+            var deferred = $q.defer();
+            $http.post('/login', {username:username, password:password}).then(function(response) {
+                if(response.data.success) {
+
+                    deferred.resolve(true);
+                } else {
+                    deferred.resolve(false);
+                }
+            });
+            return deferred.promise;
+        },
+
         createUser: function(newUserData) {
             var newUser = new User(newUserData);
             var deferred = $q.defer();

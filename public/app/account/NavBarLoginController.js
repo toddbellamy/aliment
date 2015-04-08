@@ -26,7 +26,7 @@ angular.module('app').controller('NavBarLoginController', function($scope, $http
             $scope.userame = "";
             $scope.password = "";
             Notifier.notify('You have successfully signed out!');
-            $location.path('/');
+          //  $location.path('/');
 
         })
     }

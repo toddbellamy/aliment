@@ -12,7 +12,7 @@
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitClient") Client
                                 .col-xs-9
-                                    select.form-control(name="editingVisitClient", ng-model="editingVisit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" ng-disabled="editingVisit._id != 0" required)
+                                    select.form-control(name="editingVisitClient", ng-model="editingVisit.client" ng-options="client.lastName + ', ' + client.firstName  for client in family.clients track by client._id" required)
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitDate") Date
                                 .col-xs-9
@@ -20,12 +20,12 @@
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitValue")  Value
                                 .col-xs-9
-                                    input.form-control(name="editingVisitValue" ng-model="editingVisit.value" ng-disabled="editingVisit._id != 0" smart-float invalid-leave)
+                                    input.form-control(name="editingVisitValue" ng-model="editingVisit.value" smart-float invalid-leave)
                                     span.error(ng-show="addVisitForm.editingVisitValue.$touched && addVisitForm.editingVisitValue.$error.float") Please enter valid monetary value
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitStoreVoucher") Store Voucher
                                 .col-xs-9
-                                    input.form-control(name="editingVisitStoreVoucher" ng-model="editingVisit.storeVoucher" ng-disabled="editingVisit._id != 0" )
+                                    input.form-control(name="editingVisitStoreVoucher" ng-model="editingVisit.storeVoucher"  )
                             .form-group
                                 .col-xs-9.col-xs-offset-2
                                     .checkbox
@@ -39,16 +39,20 @@
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitVerification") Verification
                                 .col-xs-9
-                                    input.form-control(name="editingVisitVerification" ng-model="editingVisit.verification" invalid-leave required readonly)
+                                    input.form-control(name="editingVisitVerification" ng-model="editingVisit.verification.firstName" invalid-leave required readonly)
                                     span.error(ng-show="addVisitForm.editingVisitVerification.$touched && addVisitForm.editingVisitVerification.$error.required") Please provide Verification.
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitFoodVoucher") Food Voucher
                                 .col-xs-9
-                                    input.form-control(name="editingVisitFoodVoucher" ng-model="editingVisit.foodVoucher" ng-disabled="editingVisit._id != 0")
+                                    input.form-control(name="editingVisitFoodVoucher" ng-model="editingVisit.foodVoucher" )
                             .form-group
                                 label.col-xs-3.control-label(for="editingVisitApprovedBy") Approved By
                                 .col-xs-9
-                                    select.form-control(name="editingVisitApprovedBy", ng-model="editingVisit.approvedBy" ng-options="name for name in staffNames" ng-disabled="editingVisit._id != 0")
+                                    select.form-control(name="editingVisitApprovedBy", ng-model="editingVisit.approvedBy" ng-options="user.firstName for user in staff track by user._id" ng-disabled="editingVisit._id == 0")
+                            .form-group
+                                label.col-xs-3.control-label(for="approvedByPassword") Password
+                                .col-xs-9
+                                    input.form-control(name="approvedByPassword" type="password" ng-model="approvedByPassword" ng-disabled="editingVisit._id == 0")
             .modal-footer
-                button.btn.btn-default(type="button" data-dismiss="modal") Cancel
+                button.btn.btn-default(type="button" data-dismiss="modal" ng-click="cancel()") Cancel
                 button.btn.btn-primary(type="button" ng-click="submitVisit()") Save Visit

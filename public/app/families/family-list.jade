@@ -34,6 +34,7 @@
                 td.hidden-xs
                     span {{family.dateAdded | date}}
 .container
-    pagination.pagination-sm.hide-loading(ng-hide="tableDataLoading" total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="loadFamilies()")
+    pagination.pagination-sm(total-items="pageTotalItems" items-per-page="itemsPerPage" ng-model="currentPage" max-size="pageMaxSize" boundary-links="true" rotate="false" num-pages="numPages" ng-change="loadFamilies()")
+
 
 

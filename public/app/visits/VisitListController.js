@@ -1,5 +1,5 @@
 
-function VisitListController($scope, $http, $compile, $routeParams, VisitResource, Notifier, Identity, User) {
+function VisitListController($scope, $http, $compile, $routeParams, VisitResource, Notifier, Identity, User, Auth) {
 
     $scope.formName = 'familyVisitsForm';
     $scope.documentName = 'family';
@@ -10,13 +10,13 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
     $scope.sortOrder = $scope.sortOptions[0].value;
 
     $scope.users = User.query(function() {
-            $scope.staffNames = (function () {
+            $scope.staff = (function () {
                 var staff =
                     $scope.users.filter(function (user) {
                         return (user.roles.indexOf('staff') >= 0 || user.roles.indexOf('admin') >= 0);
                     });
                 return staff.map(function (user) {
-                    return user.firstName;
+                    return user;
                 });
             })();
         });
@@ -61,9 +61,8 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
             storeVoucher:'',
             reusableBagGiven:false,
             comments:'',
-            verification: Identity.currentUser.firstName,
+            verification: Identity.currentUser,
             foodVoucher:'',
-            approvedBy:'',
             _id:'000000000000000000000000'
         };
     }
@@ -87,6 +86,37 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
             return;
         }
 
+        if($scope.editingVisit._id != 0) {
+            if(!$scope.editingVisit.approvedBy) {
+                Notifier.error("Approved By is required for change.");
+                return;
+            }
+            else {
+                if(!$scope.approvedByPassword) {
+                    Notifier.error("Approved By Password is required.");
+                    return;
+                }
+                else {
+                    Auth.authenticateUser($scope.editingVisit.approvedBy.userName, $scope.approvedByPassword).then(function (success) {
+                        if (success) {
+                            saveVisit();
+
+                        } else {
+                            $scope.approvedByPassword = "";
+                            Notifier.error('Approved By Password incorrect');
+                        }
+                        $scope.approvedByPassword = "";
+                    });
+                }
+            }
+        }
+        else {
+            saveVisit();
+        }
+
+    };
+
+    function saveVisit() {
         var addToFamily = ($scope.editingVisit._id == 0);
 
         if(addToFamily) {
@@ -123,7 +153,9 @@ function VisitListController($scope, $http, $compile, $routeParams, VisitResourc
                     Notifier.error('A problem has has occurred while saving.');
                 }
             });
+    }
 
+    $scope.cancelEdit = function() {
 
     };
 

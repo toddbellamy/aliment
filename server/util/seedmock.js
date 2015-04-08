@@ -54,11 +54,11 @@ exports.getdata = function() {
                     date: new Date(getRandomInt(2005, 2014), getRandomInt(1, 12), getRandomInt(1, 27)).toISOString(),
                     value: getRandomInt(7, 14),
                     reusableBagGiven: false,
-                    verification: staff[getRandomInt(0, staff.length - 1)],
+                    verification: {"userName" : "janes", "firstName" : "Jane", "lastName" : "Smith"},
                     storeVoucher: '',
                     comments: '',
                     foodVoucher: '',
-                    approvedBy: '',
+                    approvedBy: null,
                     client: family.clientData[getRandomInt(1, clientCount - 1)]
                 }
                 family.visitData.push(visit);

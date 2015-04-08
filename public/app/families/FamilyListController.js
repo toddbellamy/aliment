@@ -20,6 +20,9 @@ angular.module('app').controller('FamilyListController', function($scope, $locat
                 }
                 $scope.tableDataLoading = false;
                 TableHelper.freezeColWidths(clientTable$, false);
+            },
+            function(reason) {
+                console.log(reason);
             });
 
     };
